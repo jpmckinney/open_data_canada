@@ -2,6 +2,7 @@ require 'rubygems'
 require 'bundler/setup'
 
 require 'csv'
+require 'json'
 require 'set'
 require 'uri'
 
@@ -133,19 +134,46 @@ def map(output, input, prefix, size, options = {})
   end
 end
 
+def enrich(base)
+  map = {}
+
+  rows.each do |row|
+    map[row['Code']] = row
+  end
+
+  %w(areas markers).each do |suffix|
+    path = "maps/#{base}-#{suffix}.geojson"
+
+    if File.exist?(path)
+      data = JSON.load(File.read(path))
+
+      data['features'].each do |feature|
+        feature['properties']['Links'] = %(<a href="#{map[feature['properties']['ID']]['Catalog URL']}">Data catalog</a>)
+      end
+
+      File.open(path, 'w') do |f|
+        f.write(JSON.dump(data))
+      end
+    end
+  end
+end
+
 task :map_provinces_and_territories do
   map('provinces-and-territories-areas', 'gpr_000a11a_e', 'PR', 2)
   map('provinces-and-territories-markers', 'gpr_000a11a_e', 'PR', 2, centroids: true)
+  enrich('provinces-and-territories')
 end
 
 task :map_census_divisions do
   map('census-divisions-areas', 'gcd_000a11a_e', 'CD', 4)
   map('census-divisions-markers', 'gcd_000a11a_e', 'CD', 4, centroids: true)
+  enrich('census-divisions')
 end
 
 task :map_census_subdivisions do
   map('census-subdivisions-areas', 'gcsd000a11a_e', 'CSD', 7)
   map('census-subdivisions-markers', 'gcsd000a11a_e', 'CSD', 7, centroids: true)
+  enrich('census-subdivisions')
 end
 
 task :map do
@@ -157,6 +185,7 @@ task :map do
   delete_if_exists(output_path)
   echo("ogr2ogr #{output_path} canada.shp -f GeoJSON -t_srs EPSG:4326")
   echo("topojson -o maps/canada-markers.topojson #{output_path}")
+  enrich('canada')
 end
 
 task :spreadsheet do
