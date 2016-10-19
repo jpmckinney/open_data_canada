@@ -183,7 +183,7 @@ task :map do
 
   output_path = 'maps/canada-markers.geojson'
   delete_if_exists(output_path)
-  echo("ogr2ogr #{output_path} canada.shp -f GeoJSON -t_srs EPSG:4326")
+  echo("SHAPE_ENCODING=ISO-8859-1 ogr2ogr #{output_path} canada.shp -lco ENCODING=UTF-8 -f GeoJSON -t_srs EPSG:4326")
   echo("topojson -o maps/canada-markers.topojson #{output_path}")
   enrich('canada')
 end
