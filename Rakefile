@@ -10,6 +10,10 @@ require 'nokogiri'
 require 'open-uri/cached'
 require 'spreadsheet'
 
+def rows
+  parse('https://docs.google.com/spreadsheets/d/1AmLQD2KwSpz3B4eStLUPmUQJmOOjRLI3ZUZSD5xUTWM/pub?gid=0&single=true&output=csv', headers: true)
+end
+
 def parse(url, options={})
   data = open(url, open_timeout: 1, read_timeout: 1).read
   if encoding = options.delete(:encoding)
@@ -27,8 +31,10 @@ def scrub(rows, skip=0)
   end
 end
 
-def rows
-  parse('https://docs.google.com/spreadsheets/d/1AmLQD2KwSpz3B4eStLUPmUQJmOOjRLI3ZUZSD5xUTWM/pub?gid=0&single=true&output=csv', headers: true)
+def delete_if_exists(path)
+  if File.exist?(path)
+    File.unlink(path)
+  end
 end
 
 def echo(command)
@@ -86,15 +92,20 @@ def software(url)
   end
 end
 
-def map(output, input, column=nil, size=nil, format='GeoJSON', output_path=nil, append=false)
+def map(output, input, prefix, size, options = {})
   input_path = "#{input}.shp"
-  if format == 'GeoJSON'
-    output_path = "maps/#{output}.geojson"
+  output_path = options[:output_path]
+  options[:format] ||= 'GeoJSON'
+
+  if options[:format] == 'GeoJSON'
+    output_path ||= "maps/#{output}.geojson"
+  elsif output_path.nil?
+    raise 'Expected :output_path to be set'
   end
 
   if File.exist?(input_path)
-    if File.exist?(output_path) && !append
-      File.unlink(output_path)
+    unless options[:append]
+      delete_if_exists(output_path)
     end
 
     codes = rows.select do |row|
@@ -103,8 +114,15 @@ def map(output, input, column=nil, size=nil, format='GeoJSON', output_path=nil, 
       "'#{row['Code']}'"
     end
 
-    echo("ogr2ogr #{output_path} #{input_path}#{' -append' if append} -f '#{format}' -t_srs EPSG:4326#{%( -where "#{column} IN (#{codes.join(',')})") if column && size}")
-    if format == 'GeoJSON'
+    sql = if options[:centroids]
+      %(-dialect sqlite -sql "SELECT ST_Centroid(geometry), #{prefix}UID, #{prefix}NAME FROM #{input} WHERE #{prefix}UID IN (#{codes.join(',')})")
+    else
+      %(-where "#{prefix}UID IN (#{codes.join(',')})")
+    end
+
+    echo("ogr2ogr #{output_path} #{input_path}#{' -append' if options[:append]} -f '#{options[:format]}' -t_srs EPSG:4326 -select #{prefix}UID,#{prefix}NAME #{sql}")
+
+    if options[:format] == 'GeoJSON'
       echo("topojson -o maps/#{output}.topojson #{output_path}")
     end
   else
@@ -116,22 +134,29 @@ def map(output, input, column=nil, size=nil, format='GeoJSON', output_path=nil, 
 end
 
 task :map_provinces_and_territories do
-  map('provinces-and-territories', 'gpr_000a11a_e', 'PRUID', 2)
+  map('provinces-and-territories-areas', 'gpr_000a11a_e', 'PR', 2)
+  map('provinces-and-territories-markers', 'gpr_000a11a_e', 'PR', 2, centroids: true)
 end
 
 task :map_census_divisions do
-  map('census-divisions', 'gcd_000a11a_e', 'CDUID', 4)
+  map('census-divisions-areas', 'gcd_000a11a_e', 'CD', 4)
+  map('census-divisions-markers', 'gcd_000a11a_e', 'CD', 4, centroids: true)
 end
 
 task :map_census_subdivisions do
-  map('census-subdivisions', 'gcsd000a11a_e', 'CSDUID', 7)
+  map('census-subdivisions-areas', 'gcsd000a11a_e', 'CSD', 7)
+  map('census-subdivisions-markers', 'gcsd000a11a_e', 'CSD', 7, centroids: true)
 end
 
 task :map do
-  map('canada', 'gpr_000a11a_e', 'PRUID', 2, 'ESRI Shapefile', 'canada.shp')
-  map('canada', 'gcd_000a11a_e', 'CDUID', 4, 'ESRI Shapefile', 'canada.shp', true)
-  map('canada', 'gcsd000a11a_e', 'CSDUID', 7, 'ESRI Shapefile', 'canada.shp', true)
-  map('canada', 'canada')
+  map('canada', 'gpr_000a11a_e', 'PR', 2, format: 'ESRI Shapefile', output_path: 'canada.shp', centroids: true)
+  map('canada', 'gcd_000a11a_e', 'CD', 4, format: 'ESRI Shapefile', output_path: 'canada.shp', centroids: true, append: true)
+  map('canada', 'gcsd000a11a_e', 'CSD', 7, format: 'ESRI Shapefile', output_path: 'canada.shp', centroids: true, append: true)
+
+  output_path = 'maps/canada-markers.geojson'
+  delete_if_exists(output_path)
+  echo("ogr2ogr #{output_path} canada.shp -f GeoJSON -t_srs EPSG:4326")
+  echo("topojson -o maps/canada-markers.topojson #{output_path}")
 end
 
 task :spreadsheet do

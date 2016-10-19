@@ -9,12 +9,12 @@ Download the data table as:
 * [XLS](https://raw.githubusercontent.com/jpmckinney/open_data_canada/master/tables/catalogs.xls) (older Excel versions)
 * [Read online](/tables/catalogs.md)
 
-See also:
+View the maps of:
 
-* [A map of all Canadian governments with open data](/maps/canada.topojson)
-* [A map of provinces and territories with open data](/maps/provinces-and-territories.geojson)
-* [A map of census divisions (regions) with open data](/maps/census-divisions.geojson)
-* [A map of census subdivisions (municipalities) with open data](/maps/census-subdivisions.geojson)
+* All Canadian governments with open data: [markers](/maps/canada-markers.geojson)
+* Provinces and territories with open data: [markers](/maps/provinces-and-territories-markers.geojson), [areas](/maps/provinces-and-territories-areas.geojson)
+* Census divisions (regions) with open data: [markers](/maps/census-divisions-markers.geojson), [areas](/maps/census-divisions-areas.geojson)
+* Census subdivisions (municipalities) with open data: [markers](/maps/census-subdivisions-markers.geojson), [areas](/maps/census-subdivisions-areas.geojson)
 
 ## Development
 

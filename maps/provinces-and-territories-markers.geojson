@@ -1,0 +1,15 @@
+{
+"type": "FeatureCollection",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+                                                                                
+"features": [
+{ "type": "Feature", "properties": { "PRUID": "10", "PRNAME": "Newfoundland and Labrador \/ Terre-Neuve-et-Labrador" }, "geometry": { "type": "Point", "coordinates": [ -59.925838108702841, 52.810217866381294 ] } },
+{ "type": "Feature", "properties": { "PRUID": "11", "PRNAME": "Prince Edward Island \/ Île-du-Prince-Édouard" }, "geometry": { "type": "Point", "coordinates": [ -63.226804636791591, 46.347081818601836 ] } },
+{ "type": "Feature", "properties": { "PRUID": "12", "PRNAME": "Nova Scotia \/ Nouvelle-Écosse" }, "geometry": { "type": "Point", "coordinates": [ -63.26373539433316, 45.155681151694907 ] } },
+{ "type": "Feature", "properties": { "PRUID": "13", "PRNAME": "New Brunswick \/ Nouveau-Brunswick" }, "geometry": { "type": "Point", "coordinates": [ -66.316853757592838, 46.601751970323733 ] } },
+{ "type": "Feature", "properties": { "PRUID": "24", "PRNAME": "Quebec \/ Québec" }, "geometry": { "type": "Point", "coordinates": [ -71.522265548108408, 53.294722426498758 ] } },
+{ "type": "Feature", "properties": { "PRUID": "35", "PRNAME": "Ontario" }, "geometry": { "type": "Point", "coordinates": [ -85.951562465386033, 50.235680900488106 ] } },
+{ "type": "Feature", "properties": { "PRUID": "48", "PRNAME": "Alberta" }, "geometry": { "type": "Point", "coordinates": [ -114.511017416301144, 55.169842086628222 ] } },
+{ "type": "Feature", "properties": { "PRUID": "59", "PRNAME": "British Columbia \/ Colombie-Britannique" }, "geometry": { "type": "Point", "coordinates": [ -125.096887939725391, 54.556205431170426 ] } }
+]
+}
