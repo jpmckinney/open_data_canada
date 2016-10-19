@@ -1,5 +1,11 @@
 # Open Data Canada
 
+## Resources
+
+* [A map of all open data municipalities (census subdivisions)](/maps/census-subdivisions.geojson)
+
+## Development
+
 Install:
 
     bundle
