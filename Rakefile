@@ -144,9 +144,9 @@ task :spreadsheet do
     # Provinces and territories
     'http://www12.statcan.gc.ca/census-recensement/2011/dp-pd/hlt-fst/pd-pl/FullFile.cfm?T=101&LANG=Eng&OFT=CSV&OFN=98-310-XWE2011002-101.CSV' => true,
     # Census divisions
-    'http://www12.statcan.gc.ca/census-recensement/2011/dp-pd/hlt-fst/pd-pl/FullFile.cfm?T=301&LANG=Eng&OFT=CSV&OFN=98-310-XWE2011002-301.CSV' => false,
-    # Census subdivisions
     'http://www12.statcan.gc.ca/census-recensement/2011/dp-pd/hlt-fst/pd-pl/FullFile.cfm?T=701&LANG=Eng&OFT=CSV&OFN=98-310-XWE2011002-701.CSV' => false,
+    # Census subdivisions
+    'http://www12.statcan.gc.ca/census-recensement/2011/dp-pd/hlt-fst/pd-pl/FullFile.cfm?T=301&LANG=Eng&OFT=CSV&OFN=98-310-XWE2011002-301.CSV' => false,
   }.each do |url,subnational|
     scrub(parse(url, encoding: 'iso-8859-1'), subnational ? 2 : 3).each do |row|
       old_row = map[row[0]]

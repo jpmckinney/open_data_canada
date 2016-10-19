@@ -8,6 +8,19 @@ Quebec,24,7903001,https://www.donneesquebec.ca/fr/,https://www.donneesquebec.ca/
 Ontario,35,12851821,https://www.ontario.ca/search/data-catalogue,https://www.ontario.ca/page/open-government-licence-ontario,https://www.ontario.ca/page/ontarios-open-data-directive,,,opengov@ontario.ca,,
 Alberta,48,3645257,http://open.alberta.ca/,https://open.alberta.ca/licence,http://open.alberta.ca/policy,,,open@gov.ab.ca,https://twitter.com/OpenGovAB,https://ckan.org/
 British Columbia,59,4400057,https://catalogue.data.gov.bc.ca/,http://www2.gov.bc.ca/gov/content/governments/about-the-bc-government/databc/open-data/open-government-license-bc,http://www2.gov.bc.ca/assets/gov/british-columbians-our-governments/services-policies-for-government/information-management-technology/information-privacy/resources/policies-guidelines/open-information-open-data-policy.pdf,,,https://forms.gov.bc.ca/databc-contact-us/,https://twitter.com/Data_BC,https://ckan.org/
+York (Ont.),3519,1032524,http://findit.york.ca/opendata/navigo/,http://findit.york.ca/opendata/navigo/,,Laura Thomas,Laura.Thomas@york.ca,Open.Data@york.ca,,https://www.voyagersearch.com/
+Peel (Ont.),3521,1296814,http://opendata.peelregion.ca/data-categories.aspx,http://opendata.peelregion.ca/terms-of-use.aspx,,"Ron Jaros
+Kevin Farrugia","ron.jaros@peelregion.ca
+Kevin.Farrugia@peelregion.ca",http://opendata.peelregion.ca/feedback.aspx,,
+Niagara (Ont.),3526,431346,https://niagaraopendata.ca/,https://niagaraopendata.ca/pages/open-government-license-2-0-niagara-region,,Connie McCutcheon,connie.mccutcheon@niagararegion.ca,https://niagaraopendata.ca/contact,,https://ckan.org/
+Waterloo (Ont.),3530,507096,http://www.regionofwaterloo.ca/en/regionalGovernment/OpenDataCatalogue.asp,http://www.regionofwaterloo.ca/en/regionalGovernment/OpenDataLicence.asp,,Oriana Sharp,OSharp@regionofwaterloo.ca,opendata@regionofwaterloo.ca,,
+Grey (Ont.),3542,92568,http://opendata.grey.ca/,https://geo.grey.ca/launchpage/opendatalicence,,"Geoff Hogan
+Ashleigh Weeden","geoff.hogan@grey.ca
+ashleigh.weeden@grey.ca",https://geo.grey.ca/launchpage/feedback,,http://opendata.arcgis.com/
+Okanagan-Similkameen (B.C.),5907,80742,http://www.rdos.bc.ca/departments/information-services/open-data-downloads/,http://www.rdos.bc.ca/departments/information-services/open-data-downloads/terms-of-use/,,,,,,custom
+Greater Vancouver (B.C.),5915,2313328,http://www.metrovancouver.org/data/Pages/default.aspx,,,,,gis.info@metrovancouver.org,,
+Central Okanagan (B.C.),5935,179839,http://rdcodatadownload.rdco.opendata.arcgis.com/,http://rdcodatadownload.rdco.opendata.arcgis.com/,,,,gis.support@cord.bc.ca,,http://opendata.arcgis.com/
+North Okanagan (B.C.),5937,81237,http://www.rdno.ca/index.php/maps/digital-data,http://www.rdno.ca/index.php/maps/digital-data-terms-of-use,,,,gistech@rdno.ca,,custom
 Halifax (N.S.),1209034,390096,http://catalogue.hrm.opendata.arcgis.com/,http://www.halifax.ca/opendata/OD_TermsOfUse.php,http://www.halifax.ca/legislation/adminorders/documents/2014-006-ADM.pdf,Lisa O'Toole,otoolel@halifax.ca,opendata@halifax.ca,https://twitter.com/OpenDataHalifax,http://opendata.arcgis.com/
 Saint John (N.B.),1301006,70063,http://www.saintjohn.ca/en/home/cityhall/strategicservices/informationtechnology/opendata_catalogue/default.aspx,http://www.saintjohn.ca/en/home/cityhall/financeadmin/informationtechnology/opengovernmentlicence.aspx,http://documents.saintjohn.ca/WebLink/0/edoc/58547/2015-03-02_Agenda%20Packet--Dossier%20de%20lordre%20du%20jour.pdf#page=172,"David Burke
 Yves Leger","david.burke@saintjohn.ca
@@ -141,16 +154,3 @@ West Kelowna (B.C.),5935029,30892,http://www.districtofwestkelowna.ca/471/Open-D
 Vernon (B.C.),5937014,38150,https://www.vernon.ca/government-services/maps-gis/open-data-deep,https://www.vernon.ca/government-services/maps-gis/open-data-catalogue,,,,,,
 Prince George (B.C.),5953023,71974,http://data.cityofpg.opendata.arcgis.com/,http://pgmap.princegeorge.ca/opendata/CityofPrinceGeorge_Open_Government_License_Open_Data.pdf,,,,gisinfo@princegeorge.ca,,http://opendata.arcgis.com/
 Whitehorse (Y.T.),6001009,23276,http://data.whitehorse.ca/,http://data.whitehorse.ca/,,,,gis@whitehorse.ca,,custom
-York (Ont.),3519,1032524,http://findit.york.ca/opendata/navigo/,http://findit.york.ca/opendata/navigo/,,Laura Thomas,Laura.Thomas@york.ca,Open.Data@york.ca,,https://www.voyagersearch.com/
-Peel (Ont.),3521,1296814,http://opendata.peelregion.ca/data-categories.aspx,http://opendata.peelregion.ca/terms-of-use.aspx,,"Ron Jaros
-Kevin Farrugia","ron.jaros@peelregion.ca
-Kevin.Farrugia@peelregion.ca",http://opendata.peelregion.ca/feedback.aspx,,
-Niagara (Ont.),3526,431346,https://niagaraopendata.ca/,https://niagaraopendata.ca/pages/open-government-license-2-0-niagara-region,,Connie McCutcheon,connie.mccutcheon@niagararegion.ca,https://niagaraopendata.ca/contact,,https://ckan.org/
-Waterloo (Ont.),3530,507096,http://www.regionofwaterloo.ca/en/regionalGovernment/OpenDataCatalogue.asp,http://www.regionofwaterloo.ca/en/regionalGovernment/OpenDataLicence.asp,,Oriana Sharp,OSharp@regionofwaterloo.ca,opendata@regionofwaterloo.ca,,
-Grey (Ont.),3542,92568,http://opendata.grey.ca/,https://geo.grey.ca/launchpage/opendatalicence,,"Geoff Hogan
-Ashleigh Weeden","geoff.hogan@grey.ca
-ashleigh.weeden@grey.ca",https://geo.grey.ca/launchpage/feedback,,http://opendata.arcgis.com/
-Okanagan-Similkameen (B.C.),5907,80742,http://www.rdos.bc.ca/departments/information-services/open-data-downloads/,http://www.rdos.bc.ca/departments/information-services/open-data-downloads/terms-of-use/,,,,,,custom
-Greater Vancouver (B.C.),5915,2313328,http://www.metrovancouver.org/data/Pages/default.aspx,,,,,gis.info@metrovancouver.org,,
-Central Okanagan (B.C.),5935,179839,http://rdcodatadownload.rdco.opendata.arcgis.com/,http://rdcodatadownload.rdco.opendata.arcgis.com/,,,,gis.support@cord.bc.ca,,http://opendata.arcgis.com/
-North Okanagan (B.C.),5937,81237,http://www.rdno.ca/index.php/maps/digital-data,http://www.rdno.ca/index.php/maps/digital-data-terms-of-use,,,,gistech@rdno.ca,,custom
