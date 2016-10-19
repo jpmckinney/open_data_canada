@@ -1,5 +1,7 @@
 # Database of Canadian open government data catalogs
 
+This project aggregates all known but incomplete databases to produce the most complete database.
+
 ## Downloads
 
 Download the data table as:
@@ -52,6 +54,6 @@ Create one map of all the above:
 
 ## Why?
 
-Ideally, this repository will be a point of collaboration between [Geothink](http://geothink.ca/), [MISA/ASIM Open Data Special Interest Group (SIG)](http://c.ymcdn.com/sites/www.misa-asim.ca/resource/resmgr/misa_pdfs/open_data_sig_-_terms_of_ref.pdf), [RPCO Regional Information Systems Working Group (RISWG)](http://www.rpco.ca/regional-information-systems-working-group.html) and Public Sector Open Data (PSOD).
+Ideally, this repository will be a point of collaboration between [Geothink](http://geothink.ca/), the [MISA/ASIM Open Data Special Interest Group (SIG)](http://c.ymcdn.com/sites/www.misa-asim.ca/resource/resmgr/misa_pdfs/open_data_sig_-_terms_of_ref.pdf), the [RPCO Regional Information Systems Working Group (RISWG)](http://www.rpco.ca/regional-information-systems-working-group.html), Public Sector Open Data (PSOD) and the [Government of Canada](http://open.canada.ca/en/maps/open-data-canada).
 
 Copyright (c) 2016 James McKinney, released under the MIT license
