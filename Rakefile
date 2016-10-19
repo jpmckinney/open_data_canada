@@ -218,9 +218,10 @@ task :markdown do
       end
       if row['Contact email']
         contact_names = row['Contact name'].to_s.split("\n")
-        row['Contact email'].split("\n").each_with_index do |email,i|
-          line += "  * [#{contact_names[i] || email}](mailto:#{email})\n"
-        end
+        line += "  * People: "
+        line += row['Contact email'].split("\n").map.with_index do |email,i|
+          "[#{contact_names[i] || email}](mailto:#{email})"
+        end.join(", ")
       end
       line += "\n" 
 
