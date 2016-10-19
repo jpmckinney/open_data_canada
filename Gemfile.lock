@@ -1,6 +1,11 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    axlsx (2.0.1)
+      htmlentities (~> 4.3.1)
+      nokogiri (>= 1.4.1)
+      rubyzip (~> 1.0.0)
+    htmlentities (4.3.4)
     mini_portile2 (2.1.0)
     nokogiri (1.6.8)
       mini_portile2 (~> 2.1.0)
@@ -8,14 +13,20 @@ GEM
     open-uri-cached (0.0.5)
     pkg-config (1.1.7)
     rake (11.2.2)
+    ruby-ole (1.2.11.8)
+    rubyzip (1.0.0)
+    spreadsheet (1.1.0)
+      ruby-ole (>= 1.0)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
+  axlsx
   nokogiri
   open-uri-cached
   rake
+  spreadsheet
 
 BUNDLED WITH
    1.11.2

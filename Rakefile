@@ -5,13 +5,15 @@ require 'csv'
 require 'set'
 require 'uri'
 
+require 'axlsx'
 require 'nokogiri'
 require 'open-uri/cached'
+require 'spreadsheet'
 
 def parse(url, options={})
-  data = open(url).read
+  data = open(url, open_timeout: 1, read_timeout: 1).read
   if encoding = options.delete(:encoding)
-    data.force_encoding(encoding).encode('utf-8')
+    data = data.force_encoding(encoding).encode('utf-8')
   end
   CSV.parse(data, options)
 end
@@ -78,9 +80,9 @@ def software(url)
       end
     end
   rescue OpenURI::HTTPError => error
-    error.io.status.first
+    $stderr.puts "#{error.io.status.first} #{url}"
   rescue Errno::ETIMEDOUT
-    'timeout'
+    $stderr.puts "OUT #{url}"
   end
 end
 
@@ -134,28 +136,42 @@ end
 
 task :spreadsheet do
   map = {}
+
   rows.each do |row|
     map[row['Code']] = row
   end
 
-  spreadsheet = [['Geographic name', 'Geographic code', 'Population, 2011', 'Catalog URL', 'License URL', 'Policy URL', 'Contact name', 'Contact email', 'Generic contact', 'Twitter', 'Software']]
+  census_division_type_names = {}
+  Nokogiri::HTML(open('http://www12.statcan.gc.ca/census-recensement/2011/ref/dict/table-tableau/table-tableau-4-eng.cfm').read).xpath('//table/tbody/tr/th[1]/abbr').each do |abbr|
+    census_division_type_names[abbr.text] = abbr['title'].sub(%r{ */.+\z}, '')
+  end
 
-  {
-    # Provinces and territories
-    'http://www12.statcan.gc.ca/census-recensement/2011/dp-pd/hlt-fst/pd-pl/FullFile.cfm?T=101&LANG=Eng&OFT=CSV&OFN=98-310-XWE2011002-101.CSV' => true,
+  # Map census subdivision type codes to names.
+  census_subdivision_type_names = {}
+  Nokogiri::HTML(open('http://www12.statcan.gc.ca/census-recensement/2011/ref/dict/table-tableau/table-tableau-5-eng.cfm').read).xpath('//table/tbody/tr/th[1]/abbr').each do |abbr|
+    census_subdivision_type_names[abbr.text] = abbr['title'].sub(%r{ */.+\z}, '')
+  end
+
+  data = [['Geographic name', 'Geographic type', 'Geographic code', 'Population, 2011', 'Catalog URL', 'License URL', 'Policy URL', 'Contact name', 'Contact email', 'Generic contact', 'Twitter', 'Software']]
+
+  { # Provinces and territories
+    'http://www12.statcan.gc.ca/census-recensement/2011/dp-pd/hlt-fst/pd-pl/FullFile.cfm?T=101&LANG=Eng&OFT=CSV&OFN=98-310-XWE2011002-101.CSV' => 'provinces-and-territories',
     # Census divisions
-    'http://www12.statcan.gc.ca/census-recensement/2011/dp-pd/hlt-fst/pd-pl/FullFile.cfm?T=701&LANG=Eng&OFT=CSV&OFN=98-310-XWE2011002-701.CSV' => false,
+    'http://www12.statcan.gc.ca/census-recensement/2011/dp-pd/hlt-fst/pd-pl/FullFile.cfm?T=701&LANG=Eng&OFT=CSV&OFN=98-310-XWE2011002-701.CSV' => 'census-divisions',
     # Census subdivisions
-    'http://www12.statcan.gc.ca/census-recensement/2011/dp-pd/hlt-fst/pd-pl/FullFile.cfm?T=301&LANG=Eng&OFT=CSV&OFN=98-310-XWE2011002-301.CSV' => false,
-  }.each do |url,subnational|
-    scrub(parse(url, encoding: 'iso-8859-1'), subnational ? 2 : 3).each do |row|
+    'http://www12.statcan.gc.ca/census-recensement/2011/dp-pd/hlt-fst/pd-pl/FullFile.cfm?T=301&LANG=Eng&OFT=CSV&OFN=98-310-XWE2011002-301.CSV' => 'census-subdivisions',
+  }.each do |url,level|
+    scrub(parse(url, encoding: 'iso-8859-1'), level == 'provinces-and-territories' ? 2 : 3).each do |row|
       old_row = map[row[0]]
 
       if old_row && old_row['Catalog URL']
-        new_row = if subnational
-          [row[1], row[0], row[3].to_i]
-        else
-          [row[1], row[0], row[4].to_i]
+        new_row = case level
+        when 'provinces-and-territories'
+          [row[1], nil, row[0], row[3].to_i]
+        when 'census-divisions'
+          [row[1], census_division_type_names.fetch(row[2].strip), row[0], row[4].to_i]
+        when 'census-subdivisions'
+          [row[1], census_subdivision_type_names.fetch(row[2].strip), row[0], row[4].to_i]
         end
 
         new_row += old_row.values_at('Catalog URL', 'License URL', 'Policy URL', 'Contact name', 'Contact email', 'Generic contact', 'Twitter')
@@ -166,15 +182,72 @@ task :spreadsheet do
 
         new_row << software(old_row['Catalog URL'])
 
-        spreadsheet << new_row
+        data << new_row
       end
     end
   end
 
   CSV.open('tables/catalogs.csv', 'w') do |csv|
-    spreadsheet.each do |row|
+    data.each do |row|
       csv << row
     end
+  end
+
+  workbook = Spreadsheet::Workbook.new
+  blue_style = Spreadsheet::Format.new(color: :blue, underline: :single)
+  worksheet = workbook.create_worksheet
+  data.each_with_index do |row, i|
+    styles = row.map do |cell|
+      if String === cell && cell[/@|http/]
+        blue_style
+      end
+    end
+
+    cells = row.map do |cell|
+      if String === cell && cell['@']
+        Spreadsheet::Link.new("mailto:#{cell}", cell)
+      elsif String === cell && cell['http']
+        Spreadsheet::Link.new(cell, cell)
+      else
+        cell
+      end
+    end
+
+    worksheet.insert_row(i, cells)
+
+    styles.each_with_index do |style, i|
+      if style
+        worksheet.last_row.set_format(i, blue_style)
+      end
+    end
+  end
+  workbook.write('tables/catalogs.xls')
+
+  Axlsx::Package.new do |package|
+    package.workbook.add_worksheet do |worksheet|
+      blue_style = worksheet.styles.add_style(fg_color: 'FF0000FF', u: true)
+
+      data.each do |row|
+        styles = row.map do |cell|
+          if String === cell && cell[/@|http/]
+            blue_style
+          end
+        end
+
+        worksheet.add_row(row, style: styles)
+
+        row.each_with_index do |cell, i|
+          if String === cell
+            if cell['@']
+              worksheet.add_hyperlink(location: "mailto:#{cell}", ref: worksheet.rows.last.cells[i])
+            elsif cell['http']
+              worksheet.add_hyperlink(location: cell, ref: worksheet.rows.last.cells[i])
+            end
+          end
+        end
+      end
+    end
+    package.serialize('tables/catalogs.xlsx')
   end
 end
 
