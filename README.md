@@ -25,6 +25,10 @@ Create the spreadsheet:
 
     bundle exec spreadsheet
 
+Convert the spreadsheet into Markdown:
+
+    bundle exec markdown
+
 Create a map of the provinces and territories with open data:
 
     bundle exec rake map_provinces_and_territories

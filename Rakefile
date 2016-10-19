@@ -178,6 +178,58 @@ task :spreadsheet do
   end
 end
 
+task :markdown do
+  File.open('tables/catalogs.md', 'w') do |f|
+    rows = CSV.read('tables/catalogs.csv', headers: true, encoding: 'iso-8859-1').sort do |a,b|
+      a_size = a['Geographic code'].size
+      b_size = b['Geographic code'].size
+      if a_size == b_size
+        b['Population, 2011'].to_i <=> a['Population, 2011'].to_i
+      else
+        a_size <=> b_size
+      end
+    end
+
+    names = {
+      'http://opendata.arcgis.com/' => 'ArcGIS Open Data',
+      'http://www.nucivic.com/dkan/' => 'DKAN',
+      'https://ckan.org/' => 'CKAN',
+      'https://github.com/openlab/OGDI-DataLab' => 'OGDI DataLab',
+      'https://socrata.com/' => 'Socrata',
+      'https://www.dobt.co/' => 'Opener',
+      'https://www.voyagersearch.com/' => 'Voyager Search',
+    }
+
+    rows.each do |row|
+      line = "* [#{row[0]}](#{row['Catalog URL']})"
+
+      if row['License URL']
+        line += " ([License](#{row['License URL']})"
+      end
+      if row['Policy URL']
+        line += " ([Policy](#{row['Policy URL']})"
+      end
+      if row['Software'] && row['Software']['http']
+        line += " uses [#{names.fetch(row['Software'], row['Software'])}](#{row['Software']})"
+      end
+      line += "\n"
+
+      if row['Generic contact']
+        line += "  * [Contact](#{row['Generic contact']['@'] ? "mailto:#{row['Generic contact']}" : row['Generic contact']})\n"
+      end
+      if row['Twitter']
+        line += "  * [@#{row['Twitter'].sub('https://twitter.com/', '')}](#{row['Twitter']})\n"
+      end
+      if row['Contact email']
+        line += "  * [#{row['Contact name'] || row['Contact email']}](#{row['Contact email']})\n"
+      end
+      line += "\n" 
+
+      f.write(line)
+    end
+  end
+end
+
 task :missing do
   allowed_duplicates = Set.new(%w(
     calgaryregionopendata
