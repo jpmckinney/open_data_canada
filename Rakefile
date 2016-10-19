@@ -201,18 +201,14 @@ task :markdown do
     }
 
     rows.each do |row|
-      line = "* [#{row[0]}](#{row['Catalog URL']})"
+      line = "* [#{row[0]}](#{row['Catalog URL']})\n"
 
       if row['License URL']
-        line += " ([License](#{row['License URL']}))"
+        line += "  * [License](#{row['License URL']})\n"
       end
       if row['Policy URL']
-        line += " ([Policy](#{row['Policy URL']}))"
+        line += "  * [Policy](#{row['Policy URL']})\n"
       end
-      if row['Software'] && row['Software']['http']
-        line += " uses [#{software_names.fetch(row['Software'], row['Software'])}](#{row['Software']})"
-      end
-      line += "\n"
 
       if row['Generic contact']
         line += "  * [Contact](#{row['Generic contact']['@'] ? "mailto:#{row['Generic contact']}" : row['Generic contact']})\n"
