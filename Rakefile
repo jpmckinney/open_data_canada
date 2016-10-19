@@ -151,31 +151,25 @@ task :spreadsheet do
     'http://www12.statcan.gc.ca/census-recensement/2011/dp-pd/hlt-fst/pd-pl/FullFile.cfm?T=701&LANG=Eng&OFT=CSV&OFN=98-310-XWE2011002-701.CSV' => false,
   }.each do |url,subnational|
     scrub(parse(url, encoding: 'iso-8859-1'), subnational ? 2 : 3).each do |row|
-      if subnational
-        new_row = [row[1], row[0], nil, row[3].to_i]
-      else
-        new_row = [row[1], row[0], row[2], row[4].to_i]
-      end
-
       old_row = map[row[0]]
 
-      if old_row
-        new_row += old_row.values_at('Catalog URL', 'License URL', 'Policy URL', 'Contact name', 'Contact email', 'Generic contact', 'Twitter')
-      else
-        new_row += [nil] * 7
-      end
-
-      if new_row[-1]
-        new_row[-1] = "https://twitter.com/#{new_row[-1]}"
-      end
-
       if old_row && old_row['Catalog URL']
-        new_row << software(old_row['Catalog URL'])
-      else
-        new_row << nil
-      end
+        new_row = if subnational
+          [row[1], row[0], nil, row[3].to_i]
+        else
+          [row[1], row[0], row[2], row[4].to_i]
+        end
 
-      spreadsheet << new_row
+        new_row += old_row.values_at('Catalog URL', 'License URL', 'Policy URL', 'Contact name', 'Contact email', 'Generic contact', 'Twitter')
+
+        if new_row[-1]
+          new_row[-1] = "https://twitter.com/#{new_row[-1]}"
+        end
+
+        new_row << software(old_row['Catalog URL'])
+
+        spreadsheet << new_row
+      end
     end
   end
 
