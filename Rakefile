@@ -120,7 +120,7 @@ def map(output, input, prefix, size, options = {})
       %(-where "#{prefix}UID IN (#{codes.join(',')})")
     end
 
-    echo("ogr2ogr #{output_path} #{input_path}#{' -append' if options[:append]} -f '#{options[:format]}' -t_srs EPSG:4326 -select #{prefix}UID,#{prefix}NAME #{sql}")
+    echo("SHAPE_ENCODING=ISO-8859-1 ogr2ogr #{output_path} #{input_path}#{' -append' if options[:append]} -lco ENCODING=UTF-8 -f '#{options[:format]}' -t_srs EPSG:4326 -select #{prefix}UID,#{prefix}NAME #{sql}")
 
     if options[:format] == 'GeoJSON'
       echo("topojson -o maps/#{output}.topojson #{output_path}")
