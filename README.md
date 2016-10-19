@@ -13,10 +13,10 @@ Download the data table as:
 
 View the maps of:
 
-* All Canadian governments with open data: [markers](/maps/canada-markers.geojson)
-* Provinces and territories with open data: [markers](/maps/provinces-and-territories-markers.geojson), [areas](/maps/provinces-and-territories-areas.geojson)
-* Census divisions (regions) with open data: [markers](/maps/census-divisions-markers.geojson), [areas](/maps/census-divisions-areas.geojson)
-* Census subdivisions (municipalities) with open data: [markers](/maps/census-subdivisions-markers.geojson), [areas](/maps/census-subdivisions-areas.geojson)
+* All Canadian governments with open data: [as map pins](/maps/canada-markers.geojson)
+* Provinces and territories with open data: [as map pins](/maps/provinces-and-territories-markers.geojson), [as areas](/maps/provinces-and-territories-areas.geojson)
+* Census divisions (regions) with open data: [as map pins](/maps/census-divisions-markers.geojson), [as areas](/maps/census-divisions-areas.geojson)
+* Census subdivisions (municipalities) with open data: [as map pins](/maps/census-subdivisions-markers.geojson), [as areas](/maps/census-subdivisions-areas.geojson)
 
 ## Development
 
