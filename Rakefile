@@ -148,6 +148,7 @@ def enrich(base)
       data = JSON.load(File.read(path))
 
       data['features'].each do |feature|
+        feature['properties']['Name'].sub!(%r{ *[(/].+\z}, '')
         feature['properties']['Links'] = %(<a href="#{map[feature['properties']['ID']]['Catalog URL']}">Data catalog</a>)
       end
 
