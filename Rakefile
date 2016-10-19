@@ -64,12 +64,19 @@ def rows
   CSV.parse(open('https://docs.google.com/spreadsheets/d/1AmLQD2KwSpz3B4eStLUPmUQJmOOjRLI3ZUZSD5xUTWM/pub?gid=0&single=true&output=csv').read, headers: true)
 end
 
-def map(output, input, column, size)
+def echo(command)
+  puts command
+  system(command)
+end
+
+def map(output, input, column, size, format='GeoJSON', output_path=nil, append=false)
   input_path = "#{input}.shp"
-  output_path = "maps/#{output}.geojson"
+  if format == 'GeoJSON'
+    output_path = "maps/#{output}.geojson"
+  end
 
   if File.exist?(input_path)
-    if File.exist?(output_path)
+    if File.exist?(output_path) && !append
       File.unlink(output_path)
     end
 
@@ -79,11 +86,9 @@ def map(output, input, column, size)
       "'#{row['Code']}'"
     end
 
-    command = %(ogr2ogr #{output_path} #{input_path} -f GeoJSON -t_srs EPSG:4326 -where "#{column} IN (#{codes.join(',')})")
-    puts command
-    system(command)
+    echo(%(ogr2ogr #{output_path} #{input_path}#{' -append' if append} -f "#{format}" -t_srs EPSG:4326 -where "#{column} IN (#{codes.join(',')})"))
   else
-    puts "You must have a copy of the shapefile to generate the GeoJSON:"
+    puts "You must have a copy of the shapefile before running this task:"
     puts "curl -O http://www12.statcan.gc.ca/census-recensement/2011/geo/bound-limit/files-fichiers/#{input}.zip"
     puts "unzip #{input}.zip"
     puts "rm -f #{input}.zip"
@@ -100,6 +105,13 @@ end
 
 task :map_census_subdivisions do
   map('census-subdivisions', 'gcsd000a11a_e', 'CSDUID', 7)
+end
+
+task :map do
+  map('canada', 'gpr_000a11a_e', 'PRUID', 2, 'ESRI Shapefile', 'canada.shp')
+  map('canada', 'gcd_000a11a_e', 'CDUID', 4, 'ESRI Shapefile', 'canada.shp', true)
+  map('canada', 'gcsd000a11a_e', 'CSDUID', 7, 'ESRI Shapefile', 'canada.shp', true)
+  echo('ogr2ogr maps/canada.geojson canada.shp -f GeoJSON')
 end
 
 task :missing do
