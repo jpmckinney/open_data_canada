@@ -108,10 +108,15 @@ task :map_census_subdivisions do
 end
 
 task :map do
-  map('canada', 'gpr_000a11a_e', 'PRUID', 2, 'ESRI Shapefile', 'canada.shp')
+  output_path = 'maps/canada.geojson'
+  if File.exist?(output_path)
+    File.unlink(output_path)
+  end
+
+  map('canada', 'gcsd000a11a_e', 'CSDUID', 7, 'ESRI Shapefile', 'canada.shp')
   map('canada', 'gcd_000a11a_e', 'CDUID', 4, 'ESRI Shapefile', 'canada.shp', true)
-  map('canada', 'gcsd000a11a_e', 'CSDUID', 7, 'ESRI Shapefile', 'canada.shp', true)
-  echo('ogr2ogr maps/canada.geojson canada.shp -f GeoJSON')
+  map('canada', 'gpr_000a11a_e', 'PRUID', 2, 'ESRI Shapefile', 'canada.shp', true)
+  echo("ogr2ogr #{output_path} canada.shp -f GeoJSON")
 end
 
 task :missing do
