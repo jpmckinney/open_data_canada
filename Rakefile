@@ -323,15 +323,21 @@ task :markdown do
   }
 
   File.open('tables/catalogs.md', 'w') do |f|
-    f.write("# Database of Canadian open government data catalogs\n")
+    f.write("# Database of Canadian open government data catalogs\n\n## Table of contents\n\n")
 
-    CSV.read('tables/catalogs.csv', headers: true).group_by do |row|
+    groups = CSV.read('tables/catalogs.csv', headers: true).group_by do |row|
       if row['Geographic code'].size == 2
         row['Geographic name']
       else
         abbreviations.fetch(row['Geographic name'].match(/\((.*)\)/)[1])
       end
-    end.each do |group, items|
+    end
+
+    groups.each do |group, _|
+      f.write("* [#{group}](#{group.downcase.gsub(' ', '-')})\n")
+    end
+
+    groups.each do |group, items|
       f.write("\n## #{group}\n\n")
 
       items.sort! do |a,b|
