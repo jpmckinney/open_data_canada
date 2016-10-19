@@ -252,53 +252,72 @@ task :spreadsheet do
 end
 
 task :markdown do
+  abbreviations = {}
+
+  CSV.parse(open('https://raw.githubusercontent.com/opencivicdata/ocd-division-ids/master/identifiers/country-ca/ca_provinces_and_territories.csv').read, headers: true) do |row|
+    abbreviations[row['abbreviation']] = row['name']
+  end
+
+  software_names = {
+    'http://opendata.arcgis.com/' => 'ArcGIS Open Data',
+    'http://www.nucivic.com/dkan/' => 'DKAN',
+    'https://ckan.org/' => 'CKAN',
+    'https://github.com/openlab/OGDI-DataLab' => 'OGDI DataLab',
+    'https://socrata.com/' => 'Socrata',
+    'https://www.dobt.co/' => 'Opener',
+    'https://www.voyagersearch.com/' => 'Voyager Search',
+  }
+
   File.open('tables/catalogs.md', 'w') do |f|
-    rows = CSV.read('tables/catalogs.csv', headers: true, encoding: 'iso-8859-1').sort do |a,b|
-      a_size = a['Geographic code'].size
-      b_size = b['Geographic code'].size
-      if a_size == b_size
-        b['Population, 2011'].to_i <=> a['Population, 2011'].to_i
+    f.write("# Database of Canadian open government data catalogs \n")
+
+    CSV.read('tables/catalogs.csv', headers: true).group_by do |row|
+      if row['Geographic code'].size == 2
+        row['Geographic name']
       else
-        a_size <=> b_size
+        abbreviations.fetch(row['Geographic name'].match(/\((.*)\)/)[1])
       end
-    end
+    end.each do |group, items|
+      f.write("\n## #{group}\n\n")
 
-    software_names = {
-      'http://opendata.arcgis.com/' => 'ArcGIS Open Data',
-      'http://www.nucivic.com/dkan/' => 'DKAN',
-      'https://ckan.org/' => 'CKAN',
-      'https://github.com/openlab/OGDI-DataLab' => 'OGDI DataLab',
-      'https://socrata.com/' => 'Socrata',
-      'https://www.dobt.co/' => 'Opener',
-      'https://www.voyagersearch.com/' => 'Voyager Search',
-    }
+      items.sort! do |a,b|
+        # Sort by level and then by population.
+        a_size = a['Geographic code'].size
+        b_size = b['Geographic code'].size
 
-    rows.each do |row|
-      line = "* [#{row[0]}](#{row['Catalog URL']})\n"
-
-      if row['License URL']
-        line += "  * [License](#{row['License URL']})\n"
-      end
-      if row['Policy URL']
-        line += "  * [Policy](#{row['Policy URL']})\n"
+        if a_size == b_size
+          b['Population, 2011'].to_i <=> a['Population, 2011'].to_i
+        else
+          a_size <=> b_size
+        end
       end
 
-      if row['Generic contact']
-        line += "  * [Contact](#{row['Generic contact']['@'] ? "mailto:#{row['Generic contact']}" : row['Generic contact']})\n"
-      end
-      if row['Twitter']
-        line += "  * [@#{row['Twitter'].sub('https://twitter.com/', '')}](#{row['Twitter']})\n"
-      end
-      if row['Contact email']
-        contact_names = row['Contact name'].to_s.split("\n")
-        line += "  * People: "
-        line += row['Contact email'].split("\n").map.with_index do |email,i|
-          "[#{contact_names[i] || email}](mailto:#{email})"
-        end.join(", ")
-        line += "\n"
-      end
+      items.each do |row|
+        line = "* [#{row[0].sub(%r{ *[(/].+\z}, '')}](#{row['Catalog URL']})\n"
 
-      f.write(line)
+        if row['License URL']
+          line += "  * [License](#{row['License URL']})\n"
+        end
+        if row['Policy URL']
+          line += "  * [Policy](#{row['Policy URL']})\n"
+        end
+        if row['Generic contact']
+          line += "  * [Contact](#{row['Generic contact']['@'] ? "mailto:#{row['Generic contact']}" : row['Generic contact']})\n"
+        end
+        if row['Twitter']
+          line += "  * [@#{row['Twitter'].sub('https://twitter.com/', '')}](#{row['Twitter']})\n"
+        end
+        if row['Contact email']
+          line += "  * People: "
+          contact_names = row['Contact name'].to_s.split("\n")
+          line += row['Contact email'].split("\n").map.with_index do |email,i|
+            "[#{contact_names[i] || email}](mailto:#{email})"
+          end.join(", ")
+          line += "\n"
+        end
+
+        f.write(line)
+      end
     end
   end
 end
