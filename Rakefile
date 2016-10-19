@@ -8,6 +8,32 @@ require 'uri'
 require 'nokogiri'
 require 'open-uri/cached'
 
+def parse(url, options={})
+  data = open(url).read
+  if encoding = options.delete(:encoding)
+    data.force_encoding(encoding).encode('utf-8')
+  end
+  CSV.parse(data, options)
+end
+
+def scrub(rows, skip=0)
+  skip.times do
+    rows.shift
+  end
+  rows.take_while do |row|
+    !row.empty?
+  end
+end
+
+def rows
+  parse('https://docs.google.com/spreadsheets/d/1AmLQD2KwSpz3B4eStLUPmUQJmOOjRLI3ZUZSD5xUTWM/pub?gid=0&single=true&output=csv', headers: true)
+end
+
+def echo(command)
+  puts command
+  system(command)
+end
+
 def get_host(url)
   begin
     URI.parse(url).host
@@ -60,15 +86,6 @@ def software(url)
   end
 end
 
-def rows
-  CSV.parse(open('https://docs.google.com/spreadsheets/d/1AmLQD2KwSpz3B4eStLUPmUQJmOOjRLI3ZUZSD5xUTWM/pub?gid=0&single=true&output=csv').read, headers: true)
-end
-
-def echo(command)
-  puts command
-  system(command)
-end
-
 def map(output, input, column=nil, size=nil, format='GeoJSON', output_path=nil, append=false)
   input_path = "#{input}.shp"
   if format == 'GeoJSON'
@@ -111,15 +128,65 @@ task :map_census_subdivisions do
 end
 
 task :map do
-  output_path = 'maps/canada.geojson'
-  if File.exist?(output_path)
-    File.unlink(output_path)
-  end
-
   map('canada', 'gpr_000a11a_e', 'PRUID', 2, 'ESRI Shapefile', 'canada.shp')
   map('canada', 'gcd_000a11a_e', 'CDUID', 4, 'ESRI Shapefile', 'canada.shp', true)
   map('canada', 'gcsd000a11a_e', 'CSDUID', 7, 'ESRI Shapefile', 'canada.shp', true)
   map('canada', 'canada')
+end
+
+task :spreadsheet do
+  map = {}
+  rows.each do |row|
+    map[row['Code']] = row
+  end
+
+  names = {}
+
+  spreadsheet = [['Geographic name', 'Region', 'Geographic code', 'Geographic type', 'Population, 2011', 'Catalog URL', 'License URL', 'Policy URL', 'Contact name', 'Contact email', 'Generic contact', 'Twitter', 'Software']]
+
+  {
+    # Provinces and territories
+    'http://www12.statcan.gc.ca/census-recensement/2011/dp-pd/hlt-fst/pd-pl/FullFile.cfm?T=101&LANG=Eng&OFT=CSV&OFN=98-310-XWE2011002-101.CSV' => true,
+    # Census divisions
+    'http://www12.statcan.gc.ca/census-recensement/2011/dp-pd/hlt-fst/pd-pl/FullFile.cfm?T=301&LANG=Eng&OFT=CSV&OFN=98-310-XWE2011002-301.CSV' => false,
+    # Census subdivisions
+    'http://www12.statcan.gc.ca/census-recensement/2011/dp-pd/hlt-fst/pd-pl/FullFile.cfm?T=701&LANG=Eng&OFT=CSV&OFN=98-310-XWE2011002-701.CSV' => false,
+  }.each do |url,subnational|
+    scrub(parse(url, encoding: 'iso-8859-1'), subnational ? 2 : 3).each do |row|
+      names[row[0]] = row[1]
+      if subnational
+        new_row = [row[1], nil, row[0], nil, row[3].to_i]
+      else
+        new_row = [row[1], names[row[0][0, 2]], row[0], row[2], row[4].to_i]
+      end
+
+      old_row = map[row[0]]
+
+      if old_row
+        new_row += old_row.values_at('Catalog URL', 'License URL', 'Policy URL', 'Contact name', 'Contact email', 'Generic contact', 'Twitter')
+      else
+        new_row += [nil] * 7
+      end
+
+      if new_row[-1]
+        new_row[-1] = "https://twitter.com/#{new_row[-1]}"
+      end
+
+      if old_row && old_row['Catalog URL']
+        new_row << software(old_row['Catalog URL'])
+      else
+        new_row << nil
+      end
+
+      spreadsheet << new_row
+    end
+  end
+
+  CSV.open('tables/catalogs.csv', 'w') do |csv|
+    spreadsheet.each do |row|
+      csv << row
+    end
+  end
 end
 
 task :missing do
