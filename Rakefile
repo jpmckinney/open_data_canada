@@ -190,7 +190,7 @@ task :markdown do
       end
     end
 
-    names = {
+    software_names = {
       'http://opendata.arcgis.com/' => 'ArcGIS Open Data',
       'http://www.nucivic.com/dkan/' => 'DKAN',
       'https://ckan.org/' => 'CKAN',
@@ -204,13 +204,13 @@ task :markdown do
       line = "* [#{row[0]}](#{row['Catalog URL']})"
 
       if row['License URL']
-        line += " ([License](#{row['License URL']})"
+        line += " ([License](#{row['License URL']}))"
       end
       if row['Policy URL']
-        line += " ([Policy](#{row['Policy URL']})"
+        line += " ([Policy](#{row['Policy URL']}))"
       end
       if row['Software'] && row['Software']['http']
-        line += " uses [#{names.fetch(row['Software'], row['Software'])}](#{row['Software']})"
+        line += " uses [#{software_names.fetch(row['Software'], row['Software'])}](#{row['Software']})"
       end
       line += "\n"
 
@@ -221,7 +221,10 @@ task :markdown do
         line += "  * [@#{row['Twitter'].sub('https://twitter.com/', '')}](#{row['Twitter']})\n"
       end
       if row['Contact email']
-        line += "  * [#{row['Contact name'] || row['Contact email']}](#{row['Contact email']})\n"
+        contact_names = row['Contact name'].to_s.split("\n")
+        row['Contact email'].split("\n").each_with_index do |email,i|
+          line += "  * [#{contact_names[i] || email}](#{email})\n"
+        end
       end
       line += "\n" 
 
