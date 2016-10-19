@@ -4,9 +4,9 @@
 
 Download the data table as:
 
-* [CSV](https://raw.githubusercontent.com/jpmckinney/open_data_canada/master/tables/catalogs.csv) ([preview](/tables/catalogs.csv))
-* [Excel (2007 and later) (XLSX)](https://raw.githubusercontent.com/jpmckinney/open_data_canada/master/tables/catalogs.xlsx)
-* [Excel (older versions) (XLS)](https://raw.githubusercontent.com/jpmckinney/open_data_canada/master/tables/catalogs.xls)
+* [CSV](https://raw.githubusercontent.com/jpmckinney/open_data_canada/master/tables/catalogs.csv) ([view online](/tables/catalogs.csv))
+* [XLSX](https://raw.githubusercontent.com/jpmckinney/open_data_canada/master/tables/catalogs.xlsx) (Excel 2007 and later)
+* [XLS](https://raw.githubusercontent.com/jpmckinney/open_data_canada/master/tables/catalogs.xls) (older Excel versions)
 
 See also:
 
