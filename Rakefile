@@ -269,7 +269,7 @@ task :markdown do
   }
 
   File.open('tables/catalogs.md', 'w') do |f|
-    f.write("# Database of Canadian open government data catalogs \n")
+    f.write("# Database of Canadian open government data catalogs\n")
 
     CSV.read('tables/catalogs.csv', headers: true).group_by do |row|
       if row['Geographic code'].size == 2

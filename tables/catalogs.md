@@ -1,4 +1,4 @@
-# Database of Canadian open government data catalogs 
+# Database of Canadian open government data catalogs
 
 ## Canada
 
