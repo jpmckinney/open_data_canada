@@ -7,6 +7,7 @@ GEM
       pkg-config (~> 1.1.7)
     open-uri-cached (0.0.5)
     pkg-config (1.1.7)
+    rake (11.2.2)
 
 PLATFORMS
   ruby
@@ -14,6 +15,7 @@ PLATFORMS
 DEPENDENCIES
   nokogiri
   open-uri-cached
+  rake
 
 BUNDLED WITH
    1.11.2

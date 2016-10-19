@@ -69,7 +69,7 @@ def echo(command)
   system(command)
 end
 
-def map(output, input, column, size, format='GeoJSON', output_path=nil, append=false)
+def map(output, input, column=nil, size=nil, format='GeoJSON', output_path=nil, append=false)
   input_path = "#{input}.shp"
   if format == 'GeoJSON'
     output_path = "maps/#{output}.geojson"
@@ -86,7 +86,10 @@ def map(output, input, column, size, format='GeoJSON', output_path=nil, append=f
       "'#{row['Code']}'"
     end
 
-    echo(%(ogr2ogr #{output_path} #{input_path}#{' -append' if append} -f "#{format}" -t_srs EPSG:4326 -where "#{column} IN (#{codes.join(',')})"))
+    echo("ogr2ogr #{output_path} #{input_path}#{' -append' if append} -f '#{format}' -t_srs EPSG:4326#{%( -where "#{column} IN (#{codes.join(',')})") if column && size}")
+    if format == 'GeoJSON'
+      echo("topojson -o maps/#{output}.topojson #{output_path}")
+    end
   else
     puts "You must have a copy of the shapefile before running this task:"
     puts "curl -O http://www12.statcan.gc.ca/census-recensement/2011/geo/bound-limit/files-fichiers/#{input}.zip"
@@ -116,7 +119,7 @@ task :map do
   map('canada', 'gcsd000a11a_e', 'CSDUID', 7, 'ESRI Shapefile', 'canada.shp')
   map('canada', 'gcd_000a11a_e', 'CDUID', 4, 'ESRI Shapefile', 'canada.shp', true)
   map('canada', 'gpr_000a11a_e', 'PRUID', 2, 'ESRI Shapefile', 'canada.shp', true)
-  echo("ogr2ogr #{output_path} canada.shp -f GeoJSON")
+  map('canada', 'canada')
 end
 
 task :missing do
