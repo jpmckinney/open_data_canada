@@ -2,6 +2,8 @@
 
 This project aggregates all known but incomplete databases to produce the most complete database.
 
+Contributions, corrections and suggestions are welcome. Either [create an issue on GitHub](https://github.com/jpmckinney/open_data_canada/issues/new) or [contact James McKinney](mailto:james@slashpoundbang.com).
+
 ## Downloads
 
 Download the data table as:
