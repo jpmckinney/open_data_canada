@@ -64,20 +64,37 @@ def rows
   CSV.parse(open('https://docs.google.com/spreadsheets/d/1AmLQD2KwSpz3B4eStLUPmUQJmOOjRLI3ZUZSD5xUTWM/pub?gid=0&single=true&output=csv').read, headers: true)
 end
 
-task :geojson do
-  if File.exist?('gcsd000a11a_e.shp')
-    File.unlink('maps/census-subdivisions.geojson')
+def map(output, input, column, size)
+  input_path = "#{input}.shp"
+  output_path = "maps/#{output}.geojson"
+
+  if File.exist?(input_path)
+    if File.exist?(output_path)
+      File.unlink(output_path)
+    end
+
     codes = rows.select do |row|
-      row['Catalog URL'] && row['Code'].size == 7
+      row['Catalog URL'] && row['Code'].size == size
     end.map do |row|
       "'#{row['Code']}'"
     end
-    `ogr2ogr maps/census-subdivisions.geojson gcsd000a11a_e.shp -f GeoJSON -t_srs EPSG:4326 -where "CSDUID IN (#{codes.join(',')})"`
+
+    command = %(ogr2ogr #{output_path} #{input_path} -f GeoJSON -t_srs EPSG:4326 -where "#{column} IN (#{codes.join(',')})")
+    puts command
+    system(command)
   else
-    puts "You must have a copy of the census subdivisions to generate the GeoJSON:"
-    puts 'curl -O http://www12.statcan.gc.ca/census-recensement/2011/geo/bound-limit/files-fichiers/gcsd000a11a_e.zip'
-    puts 'unzip gcsd000a11a_e.zip'
+    puts "You must have a copy of the shapefile to generate the GeoJSON:"
+    puts "curl -O http://www12.statcan.gc.ca/census-recensement/2011/geo/bound-limit/files-fichiers/#{input}.zip"
+    puts "unzip #{input_path}"
   end
+end
+
+task :map_census_divisions do
+  map('census-divisions', 'gcd_000a11a_e', 'CDUID', 4)
+end
+
+task :map_census_subdivisions do
+  map('census-subdivisions', 'gcsd000a11a_e', 'CSDUID', 7)
 end
 
 task :missing do
