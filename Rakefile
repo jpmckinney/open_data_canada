@@ -334,7 +334,7 @@ task :markdown do
     end
 
     groups.each do |group, _|
-      f.write("* [#{group}](#{group.downcase.gsub(' ', '-')})\n")
+      f.write("* [#{group}](##{group.downcase.gsub(' ', '-')})\n")
     end
 
     groups.each do |group, items|

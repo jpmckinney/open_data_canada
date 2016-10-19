@@ -2,18 +2,18 @@
 
 ## Table of contents
 
-* [Canada](canada)
-* [Newfoundland and Labrador](newfoundland-and-labrador)
-* [Prince Edward Island](prince-edward-island)
-* [Nova Scotia](nova-scotia)
-* [New Brunswick](new-brunswick)
-* [Quebec](quebec)
-* [Ontario](ontario)
-* [Alberta](alberta)
-* [British Columbia](british-columbia)
-* [Manitoba](manitoba)
-* [Saskatchewan](saskatchewan)
-* [Yukon](yukon)
+* [Canada](#canada)
+* [Newfoundland and Labrador](#newfoundland-and-labrador)
+* [Prince Edward Island](#prince-edward-island)
+* [Nova Scotia](#nova-scotia)
+* [New Brunswick](#new-brunswick)
+* [Quebec](#quebec)
+* [Ontario](#ontario)
+* [Alberta](#alberta)
+* [British Columbia](#british-columbia)
+* [Manitoba](#manitoba)
+* [Saskatchewan](#saskatchewan)
+* [Yukon](#yukon)
 
 ## Canada
 
