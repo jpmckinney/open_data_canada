@@ -3,9 +3,9 @@
 ## Resources
 
 * [A map of all Canadian governments with open data](/maps/canada.topojson)
-* [A map of provinces and territories with open data](/maps/provinces-and-territories.topojson)
-* [A map of census divisions (regions) with open data](/maps/census-divisions.topojson)
-* [A map of census subdivisions (municipalities) with open data](/maps/census-subdivisions.topojson)
+* [A map of provinces and territories with open data](/maps/provinces-and-territories.geojson)
+* [A map of census divisions (regions) with open data](/maps/census-divisions.geojson)
+* [A map of census subdivisions (municipalities) with open data](/maps/census-subdivisions.geojson)
 
 ## Development
 

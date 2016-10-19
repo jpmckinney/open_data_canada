@@ -116,9 +116,9 @@ task :map do
     File.unlink(output_path)
   end
 
-  map('canada', 'gcsd000a11a_e', 'CSDUID', 7, 'ESRI Shapefile', 'canada.shp')
+  map('canada', 'gpr_000a11a_e', 'PRUID', 2, 'ESRI Shapefile', 'canada.shp')
   map('canada', 'gcd_000a11a_e', 'CDUID', 4, 'ESRI Shapefile', 'canada.shp', true)
-  map('canada', 'gpr_000a11a_e', 'PRUID', 2, 'ESRI Shapefile', 'canada.shp', true)
+  map('canada', 'gcsd000a11a_e', 'CSDUID', 7, 'ESRI Shapefile', 'canada.shp', true)
   map('canada', 'canada')
 end
 
