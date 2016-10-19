@@ -75,8 +75,6 @@ def software(url)
       end
       if number_of_files >= 2 # Brandon 2 Thunder Bay 4
         'custom'
-      else
-        'unknown'
       end
     end
   rescue OpenURI::HTTPError => error
@@ -140,7 +138,7 @@ task :spreadsheet do
     map[row['Code']] = row
   end
 
-  spreadsheet = [['Geographic name', 'Geographic code', 'Geographic type', 'Population, 2011', 'Catalog URL', 'License URL', 'Policy URL', 'Contact name', 'Contact email', 'Generic contact', 'Twitter', 'Software']]
+  spreadsheet = [['Geographic name', 'Geographic code', 'Population, 2011', 'Catalog URL', 'License URL', 'Policy URL', 'Contact name', 'Contact email', 'Generic contact', 'Twitter', 'Software']]
 
   {
     # Provinces and territories
@@ -155,9 +153,9 @@ task :spreadsheet do
 
       if old_row && old_row['Catalog URL']
         new_row = if subnational
-          [row[1], row[0], nil, row[3].to_i]
+          [row[1], row[0], row[3].to_i]
         else
-          [row[1], row[0], row[2], row[4].to_i]
+          [row[1], row[0], row[4].to_i]
         end
 
         new_row += old_row.values_at('Catalog URL', 'License URL', 'Policy URL', 'Contact name', 'Contact email', 'Generic contact', 'Twitter')
