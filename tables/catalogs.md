@@ -2,51 +2,41 @@
   * [License](http://open.canada.ca/en/open-government-licence-canada)
   * [Policy](http://www.tbs-sct.gc.ca/pol/doc-eng.aspx?id=28108)
   * [Contact](mailto:open-ouvert@tbs-sct.gc.ca)
-
 * [Ontario](https://www.ontario.ca/search/data-catalogue)
   * [License](https://www.ontario.ca/page/open-government-licence-ontario)
   * [Policy](https://www.ontario.ca/page/ontarios-open-data-directive)
   * [Contact](mailto:opengov@ontario.ca)
-
 * [Quebec](https://www.donneesquebec.ca/fr/)
   * [License](https://www.donneesquebec.ca/fr/licence/)
   * [Contact](https://www.donneesquebec.ca/fr/contact/)
   * [@GouvOuvertQc](https://twitter.com/GouvOuvertQc)
-
 * [British Columbia](https://catalogue.data.gov.bc.ca/)
   * [License](http://www2.gov.bc.ca/gov/content/governments/about-the-bc-government/databc/open-data/open-government-license-bc)
   * [Policy](http://www2.gov.bc.ca/assets/gov/british-columbians-our-governments/services-policies-for-government/information-management-technology/information-privacy/resources/policies-guidelines/open-information-open-data-policy.pdf)
   * [Contact](https://forms.gov.bc.ca/databc-contact-us/)
   * [@Data_BC](https://twitter.com/Data_BC)
-
 * [Alberta](http://open.alberta.ca/)
   * [License](https://open.alberta.ca/licence)
   * [Policy](http://open.alberta.ca/policy)
   * [Contact](mailto:open@gov.ab.ca)
   * [@OpenGovAB](https://twitter.com/OpenGovAB)
-
 * [Nova Scotia](https://data.novascotia.ca/)
   * [License](http://novascotia.ca/opendata/licence.asp)
   * [Policy](https://novascotia.ca/treasuryboard/manuals/PDF/300/30403-01.pdf)
   * [Contact](https://novascotia.ca/opendata/contact-us.asp)
-
 * [New Brunswick](http://www.snb.ca/geonb1/e/DC/catalogue-E.asp)
   * [License](http://geonb.snb.ca/downloads/documents/geonb_license_e.pdf)
   * [Policy](http://www2.gnb.ca/content/dam/gnb/Departments/gs-sg/pdf/OpenDataPolicy.pdf)
   * [Contact](mailto:geonb@snb.ca)
-
 * [Newfoundland and Labrador](http://www.open.gov.nl.ca/)
   * [License](http://opendata.gov.nl.ca/public/opendata/page/?page-id=licence)
   * [Contact](mailto:OPE@gov.nl.ca)
   * [@ope_govnl](https://twitter.com/ope_govnl)
-
 * [Prince Edward Island](https://www.princeedwardisland.ca/en/search/site/?f%5B0%5D=type%3Aservice&f%5B1%5D=field_service_topics%3A2237)
   * [License](https://www.princeedwardisland.ca/en/information/finance/open-government-licence-prince-edward-island)
   * [Contact](https://www.princeedwardisland.ca/en/information/contact-us)
-
 * [Greater Vancouver (B.C.)](http://www.metrovancouver.org/data/Pages/default.aspx)
   * [Contact](mailto:gis.info@metrovancouver.org)
-
 * [Peel (Ont.)](http://opendata.peelregion.ca/data-categories.aspx)
   * [License](http://opendata.peelregion.ca/terms-of-use.aspx)
   * [Contact](http://opendata.peelregion.ca/feedback.aspx)
@@ -66,7 +56,6 @@
 * [Central Okanagan (B.C.)](http://rdcodatadownload.rdco.opendata.arcgis.com/)
   * [License](http://rdcodatadownload.rdco.opendata.arcgis.com/)
   * [Contact](mailto:gis.support@cord.bc.ca)
-
 * [Grey (Ont.)](http://opendata.grey.ca/)
   * [License](https://geo.grey.ca/launchpage/opendatalicence)
   * [Contact](https://geo.grey.ca/launchpage/feedback)
@@ -74,10 +63,8 @@
 * [North Okanagan (B.C.)](http://www.rdno.ca/index.php/maps/digital-data)
   * [License](http://www.rdno.ca/index.php/maps/digital-data-terms-of-use)
   * [Contact](mailto:gistech@rdno.ca)
-
 * [Okanagan-Similkameen (B.C.)](http://www.rdos.bc.ca/departments/information-services/open-data-downloads/)
   * [License](http://www.rdos.bc.ca/departments/information-services/open-data-downloads/terms-of-use/)
-
 * [Toronto (Ont.)](http://www1.toronto.ca/wps/portal/contentonly?vgnextoid=1a66e03bb8d1e310VgnVCM10000071d60f89RCRD)
   * [License](http://www1.toronto.ca/wps/portal/contentonly?vgnextoid=4a37e03bb8d1e310VgnVCM10000071d60f89RCRD&vgnextfmt=default)
   * [Policy](http://www1.toronto.ca/wps/portal/contentonly?vgnextoid=7e27e03bb8d1e310VgnVCM10000071d60f89RCRD)
@@ -159,7 +146,6 @@
 * [Longueuil (Que.)](https://www.donneesquebec.ca/fr/organisation/ville-de-longueuil/)
   * [License](https://www.donneesquebec.ca/fr/licence/)
   * [Contact](https://www.donneesquebec.ca/fr/contact/)
-
 * [Saskatoon (Sask.)](http://opendata-saskatoon.cloudapp.net/)
   * People: [Darrin Shumay](mailto:Darrin.Shumay@Saskatoon.ca), [Rob Gilhuly](mailto:Rob.Gilhuly@Saskatoon.ca), [Robert Moncur](mailto:Robert.Moncur@saskatoon.ca)
 * [Kitchener (Ont.)](http://data.kitchenergis.opendata.arcgis.com/)
@@ -208,7 +194,6 @@
 * [Kelowna (B.C.)](http://www.kelowna.ca/CM/Page3936.aspx)
   * [License](http://opendatacommons.org/licenses/pddl/summary/)
   * [Contact](mailto:opendata@kelowna.ca)
-
 * [Saanich (B.C.)](http://www.saanich.ca/EN/main/local-government/data-catalogue-1.html)
   * [License](http://www.saanich.ca/assets/Local~Government/Documents/SaanichDataCatalogueLicence.pdf)
   * [Contact](mailto:opendata@saanich.ca)
@@ -241,7 +226,6 @@
 * [Kamloops (B.C.)](http://www.kamloops.ca/downloads/maps/launch.htm)
   * [License](http://www.kamloops.ca/maps/disclaimer.html)
   * [Contact](mailto:gisinfo@kamloops.ca)
-
 * [North Vancouver (B.C.)](http://geoweb.dnv.org/data/)
   * [License](http://geoweb.dnv.org/data/)
   * [Contact](mailto:gis@dnv.org)
@@ -273,11 +257,9 @@
 * [Chilliwack (B.C.)](http://www.chilliwack.com/main/page.cfm?id=2331)
   * [License](http://www.chilliwack.com/main/page.cfm?id=2391)
   * [Contact](mailto:mapping@chilliwack.com)
-
 * [Prince George (B.C.)](http://data.cityofpg.opendata.arcgis.com/)
   * [License](http://pgmap.princegeorge.ca/opendata/CityofPrinceGeorge_Open_Government_License_Open_Data.pdf)
   * [Contact](mailto:gisinfo@princegeorge.ca)
-
 * [Saint John (N.B.)](http://www.saintjohn.ca/en/home/cityhall/strategicservices/informationtechnology/opendata_catalogue/default.aspx)
   * [License](http://www.saintjohn.ca/en/home/cityhall/financeadmin/informationtechnology/opengovernmentlicence.aspx)
   * [Policy](http://documents.saintjohn.ca/WebLink/0/edoc/58547/2015-03-02_Agenda%20Packet--Dossier%20de%20lordre%20du%20jour.pdf#page=172)
@@ -286,7 +268,6 @@
 * [New Westminster (B.C.)](http://opendata.newwestcity.ca/datasets)
   * [License](http://opendata.newwestcity.ca/licence)
   * [Contact](http://opendata.newwestcity.ca/contact)
-
 * [Medicine Hat (Alta.)](http://data.medicinehat.ca/)
   * [Contact](mailto:opendata@medicinehat.ca)
   * [@OpenDataMedHat](https://twitter.com/OpenDataMedHat)
@@ -302,7 +283,6 @@
 * [Blainville (Que.)](https://www.donneesquebec.ca/fr/organisation/ville-de-blainville/)
   * [License](http://www.gatineau.ca/donneesouvertes/licence_fr.aspx)
   * [Contact](https://www.donneesquebec.ca/fr/contact/)
-
 * [Welland (Ont.)](http://www.welland.ca/open/Opendata.asp)
   * [License](https://niagaraopendata.ca/pages/open-government-license-2-0-city-of-welland)
   * [Contact](mailto:opendata@welland.ca)
@@ -310,7 +290,6 @@
 * [Brandon (Man.)](http://opengov.brandon.ca/OpenDataService/opendata.html)
   * [License](http://opengov.brandon.ca/terms.aspx)
   * [Contact](mailto:info@brandon.ca)
-
 * [Haldimand County (Ont.)](http://opendata.haldimandcounty.on.ca/)
   * [License](http://opendata.haldimandcounty.on.ca/)
   * [Contact](mailto:gishelpdesk@haldimandcounty.on.ca)
@@ -321,27 +300,21 @@
   * People: [Chrystal Williams](mailto:Chrystal.Williams@airdrie.ca), [Corey Halford](mailto:Corey.Halford@airdrie.ca)
 * [Vernon (B.C.)](https://www.vernon.ca/government-services/maps-gis/open-data-deep)
   * [License](https://www.vernon.ca/government-services/maps-gis/open-data-catalogue)
-
 * [West Kelowna (B.C.)](http://www.districtofwestkelowna.ca/471/Open-Data)
   * [License](http://gis.westkelownacity.ca/GISFiles/disclaimer.pdf)
   * [Contact](mailto:gis@westkelownacity.ca)
-
 * [Grimsby (Ont.)](https://niagaraopendata.ca/organization/town-of-grimsby1)
   * [License](https://niagaraopendata.ca/pages/open-government-license-2-0-grimsby)
   * [Contact](https://niagaraopendata.ca/contact)
-
 * [Okotoks (Alta.)](http://www.calgaryregionopendata.ca/browse/3776)
   * [License](http://calgaryregion.ca/dam/Website/reports/General/GIS/Public-documents/Calgary-Regional-Partnership-Open-Data-Licence/Calgary%20Regional%20Partnership%20Open%20Data%20Licence.pdf)
   * [Contact](mailto:gis@okotoks.ca)
-
 * [Whitehorse (Y.T.)](http://data.whitehorse.ca/)
   * [License](http://data.whitehorse.ca/)
   * [Contact](mailto:gis@whitehorse.ca)
-
 * [Lincoln (Ont.)](https://niagaraopendata.ca/organization/town-of-lincoln)
   * [License](https://niagaraopendata.ca/pages/open-government-license-2-0-town-of-lincoln)
   * [Contact](https://niagaraopendata.ca/contact)
-
 * [Grande Prairie County No. 1 (Alta.)](http://data.countygp.ab.ca/)
   * [License](http://www.countygp.ab.ca/EN/main/community/maps-gis/open-data/open-data-licence.html)
   * [Contact](mailto:opendata@countygp.ab.ca)
@@ -353,27 +326,21 @@
 * [Cochrane (Alta.)](http://www.calgaryregionopendata.ca/browse/2843)
   * [License](http://calgaryregion.ca/dam/Website/reports/General/GIS/Public-documents/Calgary-Regional-Partnership-Open-Data-Licence/Calgary%20Regional%20Partnership%20Open%20Data%20Licence.pdf)
   * [Contact](mailto:gis@cochrane.ca)
-
 * [Chestermere (Alta.)](http://www.calgaryregionopendata.ca/browse/4856)
   * [License](http://calgaryregion.ca/dam/Website/reports/General/GIS/Public-documents/Calgary-Regional-Partnership-Open-Data-Licence/Calgary%20Regional%20Partnership%20Open%20Data%20Licence.pdf)
   * [Contact](mailto:gis@calgaryregion.ca)
-
 * [High River (Alta.)](http://www.calgaryregionopendata.ca/browse/6849)
   * [License](http://calgaryregion.ca/dam/Website/reports/General/GIS/Public-documents/Calgary-Regional-Partnership-Open-Data-Licence/Calgary%20Regional%20Partnership%20Open%20Data%20Licence.pdf)
   * [Contact](mailto:gis@calgaryregion.ca)
-
 * [Strathmore (Alta.)](http://www.calgaryregionopendata.ca/browse/7147)
   * [License](http://calgaryregion.ca/dam/Website/reports/General/GIS/Public-documents/Calgary-Regional-Partnership-Open-Data-Licence/Calgary%20Regional%20Partnership%20Open%20Data%20Licence.pdf)
   * [Contact](mailto:gis@calgaryregion.ca)
-
 * [Canmore (Alta.)](http://www.calgaryregionopendata.ca/browse/3539)
   * [License](http://calgaryregion.ca/dam/Website/reports/General/GIS/Public-documents/Calgary-Regional-Partnership-Open-Data-Licence/Calgary%20Regional%20Partnership%20Open%20Data%20Licence.pdf)
   * [Contact](mailto:gis@calgaryregion.ca)
-
 * [Lake Country (B.C.)](http://dlc.rdco.opendata.arcgis.com/)
   * [License](http://dlc.rdco.opendata.arcgis.com/)
   * [Contact](mailto:gis.support@cord.bc.ca)
-
 * [Qualicum Beach (B.C.)](https://www.opendatabc.ca/organization/qualicum-beach)
   * People: [Arnold Schwabe](mailto:aschwabe@qualicumbeach.com), [Reno Sun](mailto:rsun@qualicumbeach.com)
 * [Banff (Alta.)](http://www.banffopendata.ca/)
@@ -383,24 +350,18 @@
 * [Peachland (B.C.)](http://peachland.rdco.opendata.arcgis.com/)
   * [License](http://peachland.rdco.opendata.arcgis.com/)
   * [Contact](mailto:gis.support@cord.bc.ca)
-
 * [Black Diamond (Alta.)](http://www.calgaryregionopendata.ca/browse/3633)
   * [License](http://calgaryregion.ca/dam/Website/reports/General/GIS/Public-documents/Calgary-Regional-Partnership-Open-Data-Licence/Calgary%20Regional%20Partnership%20Open%20Data%20Licence.pdf)
   * [Contact](mailto:gis@calgaryregion.ca)
-
 * [Turner Valley (Alta.)](http://www.calgaryregionopendata.ca/browse/3635)
   * [License](http://calgaryregion.ca/dam/Website/reports/General/GIS/Public-documents/Calgary-Regional-Partnership-Open-Data-Licence/Calgary%20Regional%20Partnership%20Open%20Data%20Licence.pdf)
   * [Contact](mailto:gis@calgaryregion.ca)
-
 * [Nanton (Alta.)](http://www.calgaryregionopendata.ca/browse/3879)
   * [License](http://calgaryregion.ca/dam/Website/reports/General/GIS/Public-documents/Calgary-Regional-Partnership-Open-Data-Licence/Calgary%20Regional%20Partnership%20Open%20Data%20Licence.pdf)
   * [Contact](mailto:gis@calgaryregion.ca)
-
 * [North Frontenac (Ont.)](http://data.nftwp.opendata.arcgis.com/)
   * [License](http://www.northfrontenac.com/opendata-licence.html)
   * [Policy](http://www.northfrontenac.com/opendata-policy.html)
-
 * [Irricana (Alta.)](http://www.calgaryregionopendata.ca/browse/3653)
   * [License](http://calgaryregion.ca/dam/Website/reports/General/GIS/Public-documents/Calgary-Regional-Partnership-Open-Data-Licence/Calgary%20Regional%20Partnership%20Open%20Data%20Licence.pdf)
   * [Contact](mailto:gis@calgaryregion.ca)
-

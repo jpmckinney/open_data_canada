@@ -222,8 +222,8 @@ task :markdown do
         line += row['Contact email'].split("\n").map.with_index do |email,i|
           "[#{contact_names[i] || email}](mailto:#{email})"
         end.join(", ")
+        line += "\n"
       end
-      line += "\n" 
 
       f.write(line)
     end
