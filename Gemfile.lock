@@ -1,0 +1,21 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    mini_portile2 (2.1.0)
+    nokogiri (1.6.8)
+      mini_portile2 (~> 2.1.0)
+      pkg-config (~> 1.1.7)
+    open-uri-cached (0.0.5)
+    open_uri_redirections (0.2.1)
+    pkg-config (1.1.7)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  nokogiri
+  open-uri-cached
+  open_uri_redirections
+
+BUNDLED WITH
+   1.11.2
