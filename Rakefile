@@ -74,7 +74,7 @@ def map(output, input, column, size)
     end
 
     codes = rows.select do |row|
-      row['Catalog URL'] && row['Code'].size == size
+      row['Catalog URL'] && row['Code'] && row['Code'].size == size
     end.map do |row|
       "'#{row['Code']}'"
     end
@@ -85,8 +85,13 @@ def map(output, input, column, size)
   else
     puts "You must have a copy of the shapefile to generate the GeoJSON:"
     puts "curl -O http://www12.statcan.gc.ca/census-recensement/2011/geo/bound-limit/files-fichiers/#{input}.zip"
-    puts "unzip #{input_path}"
+    puts "unzip #{input}.zip"
+    puts "rm -f #{input}.zip"
   end
+end
+
+task :map_provinces_and_territories do
+  map('provinces-and-territories', 'gpr_000a11a_e', 'PRUID', 2)
 end
 
 task :map_census_divisions do
