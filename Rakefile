@@ -115,12 +115,12 @@ def map(output, input, prefix, size, options = {})
     end
 
     sql = if options[:centroids]
-      %(-dialect sqlite -sql "SELECT ST_Centroid(geometry), #{prefix}UID, #{prefix}NAME FROM #{input} WHERE #{prefix}UID IN (#{codes.join(',')})")
+      %(-dialect sqlite -sql "SELECT ST_Centroid(geometry), #{prefix}NAME AS Name, #{prefix}UID AS ID FROM #{input} WHERE #{prefix}UID IN (#{codes.join(',')})")
     else
-      %(-where "#{prefix}UID IN (#{codes.join(',')})")
+      %(-dialect sqlite -sql "SELECT geometry, #{prefix}NAME AS Name, #{prefix}UID AS ID from #{input} WHERE #{prefix}UID IN (#{codes.join(',')})")
     end
 
-    echo("SHAPE_ENCODING=ISO-8859-1 ogr2ogr #{output_path} #{input_path}#{' -append' if options[:append]} -lco ENCODING=UTF-8 -f '#{options[:format]}' -t_srs EPSG:4326 -select #{prefix}UID,#{prefix}NAME #{sql}")
+    echo("SHAPE_ENCODING=ISO-8859-1 ogr2ogr #{output_path} #{input_path}#{' -append' if options[:append]}#{' -lco ENCODING=UTF-8' unless options[:append]} -f '#{options[:format]}' -t_srs EPSG:4326 -select Name,ID #{sql}")
 
     if options[:format] == 'GeoJSON'
       echo("topojson -o maps/#{output}.topojson #{output_path}")
