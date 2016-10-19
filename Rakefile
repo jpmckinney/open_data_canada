@@ -140,9 +140,7 @@ task :spreadsheet do
     map[row['Code']] = row
   end
 
-  names = {}
-
-  spreadsheet = [['Geographic name', 'Region', 'Geographic code', 'Geographic type', 'Population, 2011', 'Catalog URL', 'License URL', 'Policy URL', 'Contact name', 'Contact email', 'Generic contact', 'Twitter', 'Software']]
+  spreadsheet = [['Geographic name', 'Geographic code', 'Geographic type', 'Population, 2011', 'Catalog URL', 'License URL', 'Policy URL', 'Contact name', 'Contact email', 'Generic contact', 'Twitter', 'Software']]
 
   {
     # Provinces and territories
@@ -153,11 +151,10 @@ task :spreadsheet do
     'http://www12.statcan.gc.ca/census-recensement/2011/dp-pd/hlt-fst/pd-pl/FullFile.cfm?T=701&LANG=Eng&OFT=CSV&OFN=98-310-XWE2011002-701.CSV' => false,
   }.each do |url,subnational|
     scrub(parse(url, encoding: 'iso-8859-1'), subnational ? 2 : 3).each do |row|
-      names[row[0]] = row[1]
       if subnational
-        new_row = [row[1], nil, row[0], nil, row[3].to_i]
+        new_row = [row[1], row[0], nil, row[3].to_i]
       else
-        new_row = [row[1], names[row[0][0, 2]], row[0], row[2], row[4].to_i]
+        new_row = [row[1], row[0], row[2], row[4].to_i]
       end
 
       old_row = map[row[0]]
