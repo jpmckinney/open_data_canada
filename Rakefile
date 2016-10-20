@@ -150,6 +150,14 @@ def enrich(base)
       data['features'].each do |feature|
         feature['properties']['Name'].sub!(%r{ *[(/].+\z}, '')
         feature['properties']['Links'] = %(<a href="#{map[feature['properties']['ID']]['Catalog URL']}">Data catalog</a>)
+        if base == 'canada' && suffix == 'markers'
+          case feature['properties']['ID'].size
+          when 2
+            feature['properties']['marker-color'] = '#095BA4'
+          when 4
+            feature['properties']['marker-color'] = '#2277C4'
+          end
+        end
       end
 
       File.open(path, 'w') do |f|
