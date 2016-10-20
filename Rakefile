@@ -151,11 +151,13 @@ def enrich(base)
         feature['properties']['Name'].sub!(%r{ *[(/].+\z}, '')
         feature['properties']['Links'] = %(<a href="#{map[feature['properties']['ID']]['Catalog URL']}">Data catalog</a>)
         if base == 'canada' && suffix == 'markers'
-          case feature['properties']['ID'].size
+          feature['properties']['marker-color'] = case feature['properties']['ID'].size
           when 2
-            feature['properties']['marker-color'] = '#095BA4'
+            '#095BA4'
           when 4
-            feature['properties']['marker-color'] = '#2277C4'
+            '#428ED2'
+          when 7
+            '#94C3ED'
           end
         end
       end
