@@ -1,6 +1,6 @@
 Geographic name,Geographic type,Geographic code,"Population, 2011",Catalog URL,License URL,Policy URL,Contact name,Contact email,Generic contact,Twitter,Software
 Canada,,01,33476688,http://open.canada.ca/data/en/dataset,http://open.canada.ca/en/open-government-licence-canada,http://www.tbs-sct.gc.ca/pol/doc-eng.aspx?id=28108,,,open-ouvert@tbs-sct.gc.ca,,https://ckan.org/
-Newfoundland and Labrador,,10,514536,http://www.open.gov.nl.ca/,http://opendata.gov.nl.ca/public/opendata/page/?page-id=licence,,,,OPE@gov.nl.ca,https://twitter.com/ope_govnl,
+Newfoundland and Labrador,,10,514536,http://www.open.gov.nl.ca/,http://opendata.gov.nl.ca/public/opendata/page/?page-id=licence,http://open.gov.nl.ca/pdf/OpenGov-DraftActionPlan.pdf,,,OPE@gov.nl.ca,https://twitter.com/ope_govnl,
 Prince Edward Island,,11,140204,https://www.princeedwardisland.ca/en/search/site/?f%5B0%5D=type%3Aservice&f%5B1%5D=field_service_topics%3A2237,https://www.princeedwardisland.ca/en/information/finance/open-government-licence-prince-edward-island,,,,https://www.princeedwardisland.ca/en/information/contact-us,,
 Nova Scotia,,12,921727,https://data.novascotia.ca/,http://novascotia.ca/opendata/licence.asp,https://novascotia.ca/treasuryboard/manuals/PDF/300/30403-01.pdf,,,https://novascotia.ca/opendata/contact-us.asp,,https://socrata.com/
 New Brunswick,,13,751171,http://www.snb.ca/geonb1/e/DC/catalogue-E.asp,http://geonb.snb.ca/downloads/documents/geonb_license_e.pdf,http://www2.gnb.ca/content/dam/gnb/Departments/gs-sg/pdf/OpenDataPolicy.pdf,,,geonb@snb.ca,,custom

@@ -26,6 +26,7 @@
 
 * [Newfoundland and Labrador](http://www.open.gov.nl.ca/)
   * [License](http://opendata.gov.nl.ca/public/opendata/page/?page-id=licence)
+  * [Policy](http://open.gov.nl.ca/pdf/OpenGov-DraftActionPlan.pdf)
   * [Contact](mailto:OPE@gov.nl.ca)
   * [@ope_govnl](https://twitter.com/ope_govnl)
 
