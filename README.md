@@ -4,6 +4,8 @@ This project aggregates all known but incomplete databases to produce the most c
 
 Contributions, corrections and suggestions are welcome. [Create an issue on GitHub](https://github.com/jpmckinney/open_data_canada/issues/new) or [contact James McKinney](mailto:james@slashpoundbang.com).
 
+**NEW 2016-11-05** Cambridge, Durham, East Hants, Huron, Moncton, North Cowichan, Shawinigan, St. Albert, Yellowknife.
+
 ## Downloads
 
 Download the data table as:
@@ -32,11 +34,11 @@ Find any new domain fragments among external sources:
 
 Create the spreadsheet:
 
-    bundle exec spreadsheet
+    bundle exec rake spreadsheet
 
 Convert the spreadsheet into Markdown:
 
-    bundle exec markdown
+    bundle exec rake markdown
 
 Create a map of the provinces and territories with open data:
 

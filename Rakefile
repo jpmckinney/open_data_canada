@@ -9,6 +9,7 @@ require 'uri'
 require 'axlsx'
 require 'nokogiri'
 require 'open-uri/cached'
+require 'open_uri_redirections'
 require 'spreadsheet'
 
 def rows
@@ -54,7 +55,7 @@ end
 def get_base(host)
   host.sub(/\.
     (?:
-      (?:(?:gov\.)?(?:ab|bc|on|nl|qc|public\.esolutionsgroup)\.)?ca|
+      (?:(?:gov\.)?(?:ab|bc|on|nl|qc|(?:icreate2|public)\.esolutionsgroup)\.)?ca|
       (?:(?:(?:rdco\.)?opendata\.arcgis|wpengine)\.)?com|
       cloudapp\.net|
       org
@@ -401,6 +402,26 @@ task :missing do
   ))
 
   excluded_hosts = Set.new(
+    # Multi-jurisdictional
+    %w(
+      cngo.ca
+      cto-iov.csa-acvm.ca
+      data.wpsgn.opendata.arcgis.com
+      maps.grandriver.ca
+    ) +
+    # Departmental
+    %w(
+      geogratis.gc.ca
+      gis7.nsgc.gov.ns.ca
+      maps.torontopolice.on.ca
+      opendata.tplcs.ca
+      sis.agr.gc.ca
+      www.aer.ca
+      www.empr.gov.bc.ca
+      www.javacoeapp.lrc.gov.on.ca
+      www.octranspo1.com
+      www.osc.gov.on.ca
+    ) +
     # Civil society
     %w(
       capitaleouverte.org
@@ -418,15 +439,16 @@ task :missing do
     ) +
     # Private sector
     %w(
+      ckan.namara.io
       sites.google.com
       www.meetup.com
       www.slideshare.net
       www.socialtext.net
     ) +
-    # Non-municipal
+    # Non-governmental
     %w(
-      data.wpsgn.opendata.arcgis.com
-      maps.grandriver.ca
+      databasin.org
+      www.gtfs-data-exchange.com
     ) +
     # Non-Canadian
     %w(
@@ -434,10 +456,21 @@ task :missing do
     )
   )
 
+  # https://namara.io/#/search/open?order=relevance&states=imported&source=5600339c5d95cd0001000039&source=56003416375733000100002e&source=5600348bfe5b0c0001000039&source=54d3a92170726f18024a0100&source=560ad6e3801c03000100070a&source=54da910470726f62ea1e0100&page=1
+  excluded_namara_urls = Set.new(%w(
+    http://maps.morinville.ca/morinville/view.aspx
+    http://mapservices.gov.yk.ca/arcgis
+    http://www.colwood.ca/city-hall/maps
+    http://www.gov.nu.ca/
+    http://www.sprucegrove.org/services/online_services/gis.htm
+    http://www.sturgeoncounty.ca/Services/AssessmentServices/tabid/180/Default.aspx
+  ))
+
   base_corrections = {
     'gouv' => 'donneesquebec',
     'halifax' => 'hrm',
     'kitchener' => 'kitchenergis',
+    'niagaraodi' => 'niagaraopendata',
     'niagararegion' => 'niagaraopendata',
     'openguelph' => 'guelph',
     'openregina' => 'regina',
@@ -461,8 +494,18 @@ task :missing do
     end
   end
 
+  def get_source_urls(id)
+    urls = Set.new
+    JSON.load(open("https://api.namara.io/v0/source_nestings?parent_id=#{id}").read).each do |source|
+      id = source.fetch('id')
+      urls += JSON.load(open("https://api.namara.io/v0/sources?source_nesting_id=#{id}").read).map{|source| source['url']}
+      urls += get_source_urls(id)
+    end
+    urls
+  end
+
   # Get others' lists of data catalogs.
-  urls = []
+  urls = get_source_urls('562d4589dfa2680006000007') - excluded_namara_urls
   # Local government
   urls += Nokogiri::XML(open('http://open.canada.ca/sites/default/files/kml_js/open-cities-en.kml').read).remove_namespaces!.xpath('//url').map{|url| Nokogiri::HTML(url.text).xpath('//@href')[0].value}
   urls += CSV.parse(open('https://docs.google.com/spreadsheets/d/1Qy8LBpm5qd6C7EEMQeNLNDS7ZZAvwqy9LcjjgpOiIFQ/pub?gid=0&single=true&output=csv').read, row_sep: "\r\n").drop(2).map{|row| row[2]}.compact
@@ -471,10 +514,14 @@ task :missing do
   urls += Nokogiri::XML(open('http://open.canada.ca/sites/default/files/kml_js/open-provinces-en.kml').read).remove_namespaces!.xpath('//url').map{|url| Nokogiri::HTML(url.text).xpath('//@href')[0].value}
   urls += Nokogiri::HTML(open('http://datalibre.ca/links-resources/').read).xpath('//ol[3]//@href').map{|href| href.value}
 
+  base_to_url_map = {}
+
   urls.each do |url|
     host = get_host(url)
     if host && !excluded_hosts.include?(host)
       base = get_base(host)
+      base_to_url_map[base] ||= []
+      base_to_url_map[base] << host
       # Account for different domains for the data catalogs.
       other_bases << base_corrections.fetch(base, base)
     end
@@ -482,7 +529,7 @@ task :missing do
 
   other_bases.to_a.each do |base|
     unless bases.include?(base)
-      puts base
+      puts base_to_url_map.fetch(base)
     end
   end
 end

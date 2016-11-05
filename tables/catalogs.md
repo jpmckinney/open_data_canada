@@ -14,6 +14,7 @@
 * [Manitoba](#manitoba)
 * [Saskatchewan](#saskatchewan)
 * [Yukon](#yukon)
+* [Northwest Territories](#northwest-territories)
 
 ## Canada
 
@@ -48,6 +49,9 @@
   * [Contact](mailto:opendata@halifax.ca)
   * [@OpenDataHalifax](https://twitter.com/OpenDataHalifax)
   * People: [Lisa O'Toole](mailto:otoolel@halifax.ca)
+* [East Hants](http://data.easthants.opendata.arcgis.com/)
+  * [License](http://data.easthants.opendata.arcgis.com/)
+  * [Contact](mailto:planning@easthants.ca)
 
 ## New Brunswick
 
@@ -60,6 +64,9 @@
   * [Policy](http://documents.saintjohn.ca/WebLink/0/edoc/58547/2015-03-02_Agenda%20Packet--Dossier%20de%20lordre%20du%20jour.pdf#page=172)
   * [Contact](http://www.saintjohn.ca/en/home/cityhall/financeadmin/informationtechnology/opendata/feedback_form.aspx)
   * People: [David Burke](mailto:david.burke@saintjohn.ca), [Yves Leger](mailto:yves.leger@saintjohn.ca)
+* [Moncton](http://www.moncton.ca/Government/Terms_of_use/Open_Data_Purpose/Data_Catalog_Auto.htm)
+  * [License](http://www.moncton.ca/Government/Terms_of_use.htm)
+  * [Contact](mailto:opendata@moncton.ca)
 * [Fredericton](http://data.fredericton.ca/en)
   * [License](http://www.fredericton.ca/en/citygovernment/TermsOfUse.asp)
   * [Contact](mailto:opendata@fredericton.ca)
@@ -100,6 +107,9 @@
 * [Blainville](https://www.donneesquebec.ca/fr/organisation/ville-de-blainville/)
   * [License](http://www.gatineau.ca/donneesouvertes/licence_fr.aspx)
   * [Contact](https://www.donneesquebec.ca/fr/contact/)
+* [Shawinigan](http://donnees.shawinigan.opendata.arcgis.com/)
+  * [License](http://jmap.shawinigan.ca/doc/photos/Donn%C3%A9es%20ouvertes.conditions.Shawinigan.pdf)
+  * [Contact](mailto:carteinteractive@shawinigan.ca)
 
 ## Ontario
 
@@ -115,6 +125,10 @@
   * [License](http://findit.york.ca/opendata/navigo/)
   * [Contact](mailto:Open.Data@york.ca)
   * People: [Laura Thomas](mailto:Laura.Thomas@york.ca)
+* [Durham](http://opendata.durham.ca/)
+  * [License](http://www.durham.ca/departments/corpservices/it/GIS/OpenDataLicenceAgreement.pdf)
+  * [Contact](mailto:opendata@durham.ca)
+  * People: [Lara Perroni](mailto:lara.perroni@durham.ca)
 * [Waterloo](http://www.regionofwaterloo.ca/en/regionalGovernment/OpenDataCatalogue.asp)
   * [License](http://www.regionofwaterloo.ca/en/regionalGovernment/OpenDataLicence.asp)
   * [Contact](mailto:opendata@regionofwaterloo.ca)
@@ -127,6 +141,8 @@
   * [License](https://geo.grey.ca/launchpage/opendatalicence)
   * [Contact](https://geo.grey.ca/launchpage/feedback)
   * People: [Geoff Hogan](mailto:geoff.hogan@grey.ca), [Ashleigh Weeden](mailto:ashleigh.weeden@grey.ca)
+* [Huron](http://huroncounty.huron.opendata.arcgis.com/)
+  * People: [Jacob Stevens](mailto:jstevens@huroncounty.ca)
 * [Toronto](http://www.toronto.ca/open)
   * [License](http://www1.toronto.ca/wps/portal/contentonly?vgnextoid=4a37e03bb8d1e310VgnVCM10000071d60f89RCRD)
   * [Policy](http://www1.toronto.ca/wps/portal/contentonly?vgnextoid=7e27e03bb8d1e310VgnVCM10000071d60f89RCRD)
@@ -182,7 +198,10 @@
   * [License](https://niagaraopendata.ca/pages/open-government-license-2-0-the-corporation-of-the-city-of-st-catharines)
   * [Contact](https://niagaraopendata.ca/contact)
   * People: [Andrew Cheesman](mailto:acheesman@stcatharines.ca), [Dylan Johnston](mailto:djohnston@stcatharines.ca)
-* [Kingston](http://www.cityofkingston.ca/explore/data-catalogue)
+* [Cambridge](http://data.cityofcambridge.opendata.arcgis.com/)
+  * [License](http://maps.cambridge.ca/images/opendata/Open%20data%20licence.pdf)
+  * [Contact](mailto:gis@cambridge.ca)
+* [Kingston](https://www.cityofkingston.ca/explore/data-catalogue)
   * [License](https://www.cityofkingston.ca/documents/10180/144997/GIS+-+Data+License+Agreement+Template.pdf/45503bd1-500f-4cfd-af6f-f34221ce78c3)
   * [Contact](mailto:contactus@cityofkingston.ca)
   * People: [Daryl Martin](mailto:dmartin@cityofkingston.ca), [Jess Rogers](mailto:jesrogers@cityofkingston.ca)
@@ -193,8 +212,9 @@
   * People: [Barbara Swartzentruber](mailto:Barbara.Swartzentruber@guelph.ca), [Sasha Tousignant](mailto:sasha.tousignant@guelph.ca), [Matthew Thomas](mailto:Mathew.Thomas@guelph.ca)
 * [Thunder Bay](http://www.thunderbay.ca/Living/Getting_Around/Thunder_Bay_Transit/Developers_-_Open_Data.htm)
   * People: [jbelluz@thunderbay.ca](mailto:jbelluz@thunderbay.ca)
-* [Chatham-Kent](http://www.chatham-kent.ca/sp_training/OpenData/Pages/DataCatalogue.aspx)
+* [Chatham-Kent](http://chathamkentopendata.chatham-kent.opendata.arcgis.com/)
   * [License](https://www.arcgis.com/sharing/rest/content/items/2ffb1ce148804fe4ade2414e6ef10d21/data)
+  * [Contact](mailto:ckopendata@chatham-kent.ca)
   * People: [Catherine Fitzgerald](mailto:catherinef@chatham-kent.ca)
 * [Waterloo](http://opendata.city-of-waterloo.opendata.arcgis.com/)
   * [License](http://www.waterloo.ca/en/government/OpenDataUserLicence.asp)
@@ -264,6 +284,10 @@
   * [License](http://www.lethbridge.ca/Pages/OpenDataLicense.aspx)
   * [Contact](mailto:opendata@lethbridge.ca)
   * People: [Kyle Davey](mailto:Kyle.Davey@lethbridge.ca), [Gerald Gauthier](mailto:gerald.gauthier@lethbridge.ca)
+* [St. Albert](http://stalbert.ca/getting-around/stat-transit/rider-tools/open-data-gtfs/)
+  * [License](https://stalbert.ca/city/transit/rider-tools/open-data-gtfs/)
+  * [Contact](mailto:transit@stalbert.ca)
+  * People: [Jason Wywal](mailto:jwywal@st-albert.net), [Gordon Coulman](mailto:gcoulman@st-albert.net)
 * [Medicine Hat](http://data.medicinehat.ca/)
   * [Contact](mailto:opendata@medicinehat.ca)
   * [@OpenDataMedHat](https://twitter.com/OpenDataMedHat)
@@ -382,6 +406,9 @@
 * [West Kelowna](http://www.districtofwestkelowna.ca/471/Open-Data)
   * [License](http://gis.westkelownacity.ca/GISFiles/disclaimer.pdf)
   * [Contact](mailto:gis@westkelownacity.ca)
+* [North Cowichan](http://data.northcowichan.ca/)
+  * [License](http://www.northcowichan.ca/EN/main/municipal-hall/online-services/data-catalogue/Legal.html)
+  * [Contact](mailto:info@northcowichan.ca)
 * [White Rock](http://data.whiterockcity.ca/)
   * [License](http://www2.gov.bc.ca/gov/content/governments/about-the-bc-government/databc/open-data/open-government-license-bc)
   * [Contact](http://data.whiterockcity.ca/contact)
@@ -418,3 +445,9 @@
 * [Whitehorse](http://data.whitehorse.ca/)
   * [License](http://data.whitehorse.ca/)
   * [Contact](mailto:gis@whitehorse.ca)
+
+## Northwest Territories
+
+* [Yellowknife](http://opendata.yellowknife.ca/)
+  * [License](https://www.yellowknife.ca/en/discovering-yellowknife/resources/geomatic_services/City_of_Yellowknife_Open_Data_LIcence__Terms_of_Use.pdf)
+  * [Contact](https://www.yellowknife.ca/en/Modules/email/emailattachment.aspx?id=1657&ref=http://opendata.yellowknife.ca/)
