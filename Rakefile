@@ -170,24 +170,28 @@ def enrich(base)
   end
 end
 
+desc 'Create a map of the provinces and territories with open data'
 task :map_provinces_and_territories do
   map('provinces-and-territories-areas', 'gpr_000a11a_e', 'PR', 2)
   map('provinces-and-territories-markers', 'gpr_000a11a_e', 'PR', 2, centroids: true)
   enrich('provinces-and-territories')
 end
 
+desc 'Create a map of the census divisions with open data'
 task :map_census_divisions do
   map('census-divisions-areas', 'gcd_000a11a_e', 'CD', 4)
   map('census-divisions-markers', 'gcd_000a11a_e', 'CD', 4, centroids: true)
   enrich('census-divisions')
 end
 
+desc 'Create a map of the census subdivisions with open data'
 task :map_census_subdivisions do
   map('census-subdivisions-areas', 'gcsd000a11a_e', 'CSD', 7)
   map('census-subdivisions-markers', 'gcsd000a11a_e', 'CSD', 7, centroids: true)
   enrich('census-subdivisions')
 end
 
+desc 'Create one map from all the others'
 task :map do
   map('canada', 'gpr_000a11a_e', 'PR', 2, format: 'ESRI Shapefile', output_path: 'canada.shp', centroids: true)
   map('canada', 'gcd_000a11a_e', 'CD', 4, format: 'ESRI Shapefile', output_path: 'canada.shp', centroids: true, append: true)
@@ -200,6 +204,7 @@ task :map do
   enrich('canada')
 end
 
+desc 'Create the spreadsheet'
 task :spreadsheet do
   map = {}
 
@@ -317,6 +322,7 @@ task :spreadsheet do
   end
 end
 
+desc 'Convert the spreadsheet into Markdown'
 task :markdown do
   abbreviations = {}
 
@@ -394,6 +400,7 @@ task :markdown do
   end
 end
 
+desc 'Find any new domain fragments among external sources'
 task :missing do
   allowed_duplicates = Set.new(%w(
     calgaryregionopendata

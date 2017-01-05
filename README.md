@@ -24,36 +24,17 @@ View the maps of:
 
 ## Development
 
-Install:
-
     bundle
+    bundle exec rake --tasks
 
-Find any new domain fragments among external sources:
+The typical sequence is:
 
     bundle exec rake missing
-
-Create the spreadsheet:
-
     bundle exec rake spreadsheet
-
-Convert the spreadsheet into Markdown:
-
     bundle exec rake markdown
-
-Create a map of the provinces and territories with open data:
-
     bundle exec rake map_provinces_and_territories
-
-Create a map of the census divisions with open data:
-
     bundle exec rake map_census_divisions
-
-Create a map of the census subdivisions with open data:
-
     bundle exec rake map_census_subdivisions
-
-Create one map of all the above:
-
     bundle exec rake map
 
 ## Why?
