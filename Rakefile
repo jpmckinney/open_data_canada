@@ -64,7 +64,7 @@ end
 
 def software(url)
   begin
-    data = open(url).read
+    data = open(url, allow_redirections: :safe).read
     if data['https://dobt-opener.s3.amazonaws.com/uploads/']
       'https://www.dobt.co/'
     elsif data['/esri/css/esri.css']

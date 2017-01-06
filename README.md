@@ -4,7 +4,8 @@ This project aggregates all known but incomplete databases to produce the most c
 
 Contributions, corrections and suggestions are welcome. [Create an issue on GitHub](https://github.com/jpmckinney/open_data_canada/issues/new) or [contact James McKinney](mailto:james@slashpoundbang.com).
 
-**NEW 2016-11-05** Cambridge, Durham, East Hants, Huron, Moncton, North Cowichan, Shawinigan, St. Albert, Yellowknife.
+**2017-01-06**: Added Oshawa.
+**2016-11-05**: Added Cambridge, Durham, East Hants, Huron, Moncton, North Cowichan, Shawinigan, St. Albert, Yellowknife.
 
 ## Downloads
 

@@ -1,7 +1,7 @@
 Geographic name,Geographic type,Geographic code,"Population, 2011",Catalog URL,License URL,Policy URL,Contact name,Contact email,Generic contact,Twitter,Software
 Canada,,01,33476688,http://open.canada.ca/data/en/dataset,http://open.canada.ca/en/open-government-licence-canada,http://www.tbs-sct.gc.ca/pol/doc-eng.aspx?id=28108,,,open-ouvert@tbs-sct.gc.ca,,https://ckan.org/
 Newfoundland and Labrador,,10,514536,http://www.open.gov.nl.ca/,http://opendata.gov.nl.ca/public/opendata/page/?page-id=licence,http://open.gov.nl.ca/pdf/OpenGov-DraftActionPlan.pdf,,,OPE@gov.nl.ca,https://twitter.com/ope_govnl,
-Prince Edward Island,,11,140204,https://www.princeedwardisland.ca/en/search/site/?f%5B0%5D=type%3Aservice&f%5B1%5D=field_service_topics%3A2237,https://www.princeedwardisland.ca/en/information/finance/open-government-licence-prince-edward-island,,,,https://www.princeedwardisland.ca/en/information/contact-us,,
+Prince Edward Island,,11,140204,https://www.princeedwardisland.ca/en/search/site/?f%5B0%5D=type%3Aservice&f%5B1%5D=field_service_topics%3A2237,https://www.princeedwardisland.ca/en/information/finance/open-government-licence-prince-edward-island,,Carol Mayne,camayne@gov.pe.ca,https://www.princeedwardisland.ca/en/information/contact-us,,
 Nova Scotia,,12,921727,https://data.novascotia.ca/,http://novascotia.ca/opendata/licence.asp,https://novascotia.ca/treasuryboard/manuals/PDF/300/30403-01.pdf,,,https://novascotia.ca/opendata/contact-us.asp,,https://socrata.com/
 New Brunswick,,13,751171,http://www.snb.ca/geonb1/e/DC/catalogue-E.asp,http://geonb.snb.ca/downloads/documents/geonb_license_e.pdf,http://www2.gnb.ca/content/dam/gnb/Departments/gs-sg/pdf/OpenDataPolicy.pdf,,,geonb@snb.ca,,custom
 Quebec,,24,7903001,https://www.donneesquebec.ca/fr/,https://www.donneesquebec.ca/fr/licence/,,,,https://www.donneesquebec.ca/fr/contact/,https://twitter.com/GouvOuvertQc,https://ckan.org/
@@ -15,7 +15,7 @@ Kevin Farrugia","ron.jaros@peelregion.ca
 Kevin.Farrugia@peelregion.ca",http://opendata.peelregion.ca/feedback.aspx,,
 Niagara (Ont.),Regional municipality,3526,431346,https://niagaraopendata.ca/,https://niagaraopendata.ca/pages/open-government-license-2-0-niagara-region,,Connie McCutcheon,connie.mccutcheon@niagararegion.ca,https://niagaraopendata.ca/contact,,https://ckan.org/
 Waterloo (Ont.),Regional municipality,3530,507096,http://www.regionofwaterloo.ca/en/regionalGovernment/OpenDataCatalogue.asp,http://www.regionofwaterloo.ca/en/regionalGovernment/OpenDataLicence.asp,,Oriana Sharp,OSharp@regionofwaterloo.ca,opendata@regionofwaterloo.ca,,
-Huron (Ont.),County,3540,59100,http://huroncounty.huron.opendata.arcgis.com/,,,Jacob Stevens,jstevens@huroncounty.ca,,,http://opendata.arcgis.com/
+Huron (Ont.),County,3540,59100,http://huroncounty.huron.opendata.arcgis.com/,http://www.huroncounty.ca/copyright-and-disclaimer/,,Jacob Stevens,jstevens@huroncounty.ca,gis@huroncounty.ca,,http://opendata.arcgis.com/
 Grey (Ont.),County,3542,92568,http://opendata.grey.ca/,https://geo.grey.ca/launchpage/opendatalicence,,"Geoff Hogan
 Ashleigh Weeden","geoff.hogan@grey.ca
 ashleigh.weeden@grey.ca",https://geo.grey.ca/launchpage/feedback,,http://opendata.arcgis.com/
@@ -45,6 +45,7 @@ Kingston (Ont.),City,3510010,123363,https://www.cityofkingston.ca/explore/data-c
 Jess Rogers","dmartin@cityofkingston.ca
 jesrogers@cityofkingston.ca",contactus@cityofkingston.ca,,
 North Frontenac (Ont.),Township,3510045,1842,http://data.nftwp.opendata.arcgis.com/,http://www.northfrontenac.com/opendata-licence.html,http://www.northfrontenac.com/opendata-policy.html,,,,,http://opendata.arcgis.com/
+Oshawa (Ont.),City,3518013,149607,http://city.oshawa.opendata.arcgis.com/,https://map.oshawa.ca/OpenData/Open%20Government%20Licence%20version%202.0%20-%20Oshawa.pdf,,Dave Mawby,dmawby@oshawa.ca,opendata@oshawa.ca,,http://opendata.arcgis.com/
 Newmarket (Ont.),Town,3519048,79978,http://open.newmarket.ca/,http://www.newmarket.ca/TownGovernment/Documents/Newmarket_OpenData_Licence.pdf,,Susan Chase,schase@newmarket.ca,open@newmarket.ca,,https://www.voyagersearch.com/
 Toronto (Ont.),City,3520005,2615060,http://www.toronto.ca/open,http://www1.toronto.ca/wps/portal/contentonly?vgnextoid=4a37e03bb8d1e310VgnVCM10000071d60f89RCRD,http://www1.toronto.ca/wps/portal/contentonly?vgnextoid=7e27e03bb8d1e310VgnVCM10000071d60f89RCRD,"Reham Youssef
 Kathryn Bulko
@@ -69,7 +70,7 @@ Burlington (Ont.),City,3524002,175779,http://cob.burlington.opendata.arcgis.com/
 Milton (Ont.),Town,3524009,84362,http://icreateopendata.public.esolutionsgroup.ca/,http://www.milton.ca/en/resourcesGeneral/Open_Data/Milton_Open_Data_Terms_V1.pdf,,Catherine Baldelli,catherine.baldelli@milton.ca,info@milton.ca,,
 Hamilton (Ont.),City,3525005,519949,https://www.hamilton.ca/ProjectsInitiatives/OpenData/,https://www.hamilton.ca/city-initiatives/strategies-actions/open-accessible-data,,Glenn Binkosky,Glenn.Binkosky@hamilton.ca,askCITY@hamilton.ca,,custom
 Welland (Ont.),City,3526032,50631,http://www.welland.ca/open/Opendata.asp,https://niagaraopendata.ca/pages/open-government-license-2-0-city-of-welland,,Jamie Leitch,jamie.leitch@welland.ca,opendata@welland.ca,,
-Niagara Falls (Ont.),City,3526043,82997,http://www.niagarafalls.ca/services/open/data,https://www.niagarafalls.ca/services/open/terms-and-conditions.aspx,,Janet Vittie,janet@niagarafalls.ca,opendata@niagarafalls.ca,,
+Niagara Falls (Ont.),City,3526043,82997,https://www.niagarafalls.ca/services/open/data,https://www.niagarafalls.ca/services/open/terms-and-conditions.aspx,,Janet Vittie,janet@niagarafalls.ca,opendata@niagarafalls.ca,,
 St. Catharines (Ont.),City,3526053,131400,https://niagaraopendata.ca/organization/city-of-st-catharines,https://niagaraopendata.ca/pages/open-government-license-2-0-the-corporation-of-the-city-of-st-catharines,,"Andrew Cheesman
 Dylan Johnston","acheesman@stcatharines.ca
 djohnston@stcatharines.ca",https://niagaraopendata.ca/contact,,https://ckan.org/
@@ -77,7 +78,7 @@ Lincoln (Ont.),Town,3526057,22487,https://niagaraopendata.ca/organization/town-o
 Grimsby (Ont.),Town,3526065,25325,https://niagaraopendata.ca/organization/town-of-grimsby1,https://niagaraopendata.ca/pages/open-government-license-2-0-grimsby,,,,https://niagaraopendata.ca/contact,,https://ckan.org/
 Haldimand County (Ont.),City,3528018,44876,http://opendata.haldimandcounty.on.ca/,http://opendata.haldimandcounty.on.ca/,,Matthew Davis,mdavis@haldimandcounty.on.ca,gishelpdesk@haldimandcounty.on.ca,,http://opendata.arcgis.com/
 Brantford (Ont.),City,3529006,93650,http://data.brantford.opendata.arcgis.com/,http://data.brantford.opendata.arcgis.com/,,Pete Lupiano,plupiano@brantford.ca,opendata@brantford.ca,,http://opendata.arcgis.com/
-Cambridge (Ont.),City,3530010,126748,http://data.cityofcambridge.opendata.arcgis.com/,http://maps.cambridge.ca/images/opendata/Open%20data%20licence.pdf,,,,gis@cambridge.ca,,http://opendata.arcgis.com/
+Cambridge (Ont.),City,3530010,126748,http://data.cityofcambridge.opendata.arcgis.com/,http://maps.cambridge.ca/images/opendata/Open%20data%20licence.pdf,,,,gis@cambridge.ca,,
 Kitchener (Ont.),City,3530013,219153,http://data.kitchenergis.opendata.arcgis.com/,http://www.kitchener.ca/en/insidecityhall/Open-data-license.asp,https://www.kitchener.ca/en/insidecityhall/resources/I-015_-_CORPORATE_ACCOUNTABILITY__TRANSPARENCY.pdf,"Dianne Adams
 Dan Murray","Dianne.Adams@kitchener.ca
 dan.murray@kitchener.ca",,,http://opendata.arcgis.com/
@@ -157,7 +158,7 @@ Qualicum Beach (B.C.),Town,5921023,8687,https://www.opendatabc.ca/organization/q
 Reno Sun","aschwabe@qualicumbeach.com
 rsun@qualicumbeach.com",,,https://ckan.org/
 Kamloops (B.C.),City,5933042,85678,http://www.kamloops.ca/downloads/maps/launch.htm,http://www.kamloops.ca/maps/disclaimer.html,,,,gisinfo@kamloops.ca,,custom
-Kelowna (B.C.),City,5935010,117312,http://www.kelowna.ca/CM/Page3936.aspx,http://opendatacommons.org/licenses/pddl/summary/,,,,opendata@kelowna.ca,,
+Kelowna (B.C.),City,5935010,117312,http://opendata.kelowna.ca/,http://apps.kelowna.ca/images/opendata/opengovernmentlicence.pdf,,,,opendata@kelowna.ca,,http://opendata.arcgis.com/
 Lake Country (B.C.),District municipality,5935016,11708,http://dlc.rdco.opendata.arcgis.com/,http://dlc.rdco.opendata.arcgis.com/,,,,gis.support@cord.bc.ca,,http://opendata.arcgis.com/
 Peachland (B.C.),District municipality,5935018,5200,http://peachland.rdco.opendata.arcgis.com/,http://peachland.rdco.opendata.arcgis.com/,,,,gis.support@cord.bc.ca,,http://opendata.arcgis.com/
 West Kelowna (B.C.),District municipality,5935029,30892,http://www.districtofwestkelowna.ca/471/Open-Data,http://gis.westkelownacity.ca/GISFiles/disclaimer.pdf,,,,gis@westkelownacity.ca,,custom
