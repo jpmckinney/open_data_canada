@@ -7,6 +7,8 @@ Contributions, corrections and suggestions are welcome. [Create an issue on GitH
 **2017-01-06**: Added Oshawa.
 **2016-11-05**: Added Cambridge, Durham, East Hants, Huron, Moncton, North Cowichan, Shawinigan, St. Albert, Yellowknife.
 
+Care about open source? Head over to [auditing tools for Canadian governments' open source code](https://github.com/jpmckinney/open_source_canada).
+
 ## Downloads
 
 Download the data table as:
