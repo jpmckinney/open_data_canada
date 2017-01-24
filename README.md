@@ -1,13 +1,17 @@
 # Database of Canadian open government data catalogs
 
-This project aggregates all known but incomplete databases to produce the most complete database.
+The purpose of this project is to compile the most complete list of Canadian open government data catalogs. It aggregates all known but incomplete lists, including those of [Namara](https://namara.io/), [Canada](http://open.canada.ca/en/maps/open-data-canada), [British Columbia](http://www2.gov.bc.ca/gov/content/governments/about-the-bc-government/databc/open-data), [Calgary](https://data.calgary.ca/Government/Alberta-Open-Data-Portals-Map-View/grtv-hw7b), Jury Konga and Tracey Lauriault.
+
+This project also collects the open data licenses, open data policies, contact information and catalog software of the more than 100 open data catalogs that it tracks.
 
 Contributions, corrections and suggestions are welcome. [Create an issue on GitHub](https://github.com/jpmckinney/open_data_canada/issues/new) or [contact James McKinney](mailto:james@slashpoundbang.com).
 
-**2017-01-06**: Added Oshawa.
-**2016-11-05**: Added Cambridge, Durham, East Hants, Huron, Moncton, North Cowichan, Shawinigan, St. Albert, Yellowknife.
-
 Care about open source? Head over to [auditing tools for Canadian governments' open source code](https://github.com/jpmckinney/open_source_canada).
+
+## History
+
+* **2017-01-06**: Added Oshawa.
+* **2016-11-05**: Added Cambridge, Durham, East Hants, Huron, Moncton, North Cowichan, Shawinigan, St. Albert, Yellowknife.
 
 ## Downloads
 

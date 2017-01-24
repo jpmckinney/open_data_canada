@@ -402,6 +402,9 @@ end
 
 desc 'Find any new domain fragments among external sources'
 task :missing do
+  # SETUP
+
+  # These are multi-tenant.
   allowed_duplicates = Set.new(%w(
     calgaryregionopendata
     donneesquebec
@@ -416,7 +419,7 @@ task :missing do
       data.wpsgn.opendata.arcgis.com
       maps.grandriver.ca
     ) +
-    # Departmental
+    # Departmental, in an open data jurisdiction
     %w(
       geogratis.gc.ca
       gis7.nsgc.gov.ns.ca
@@ -444,14 +447,6 @@ task :missing do
       www.opendatawr.ca
       www.quebecouvert.org
     ) +
-    # Private sector
-    %w(
-      ckan.namara.io
-      sites.google.com
-      www.meetup.com
-      www.slideshare.net
-      www.socialtext.net
-    ) +
     # Non-governmental
     %w(
       databasin.org
@@ -460,9 +455,18 @@ task :missing do
     # Non-Canadian
     %w(
       www.egov.vic.gov.au
+    ) +
+    # Private sector
+    %w(
+      ckan.namara.io
+      sites.google.com
+      www.meetup.com
+      www.slideshare.net
+      www.socialtext.net
     )
   )
 
+  # These are not open data (2017-01-24).
   # https://namara.io/#/search/open?order=relevance&states=imported&source=5600339c5d95cd0001000039&source=56003416375733000100002e&source=5600348bfe5b0c0001000039&source=54d3a92170726f18024a0100&source=560ad6e3801c03000100070a&source=54da910470726f62ea1e0100&page=1
   excluded_namara_urls = Set.new(%w(
     http://maps.morinville.ca/morinville/view.aspx
@@ -471,33 +475,63 @@ task :missing do
     http://www.gov.nu.ca/
     http://www.sprucegrove.org/services/online_services/gis.htm
     http://www.sturgeoncounty.ca/Services/AssessmentServices/tabid/180/Default.aspx
+    https://www.mern.gouv.qc.ca/english/mines/publications/publications-maps.jsp
   ))
 
+  # These are not open data (2017-01-24).
+  excluded_calgary_urls = %w(
+    http://www.amdsp.ca/index.html
+    http://www.mdtaber.ab.ca/QuickLinks.aspx?CID=18,
+  )
+
   base_corrections = {
+    # The following extracted URLs are broken:
+    'niagaraodi' => 'niagaraopendata', # http://niagaraodi.cloudapp.net/
+    'niagararegion' => 'niagaraopendata', # http://www.niagararegion.ca/government/opendata/default.aspx
+    'openregina' => 'regina', # http://openregina.cloudapp.net/
+    'princegeorge' => 'cityofpg', # http://princegeorge.ca/cityservices/online/odc/Pages/default.aspx http://princegeorge.ca/cityservices/online/odc/Pages/Documents.aspx
+    'regionaldistrict' => 'rdcodatadownload', # http://www.regionaldistrict.com/services/gis/
+
+    # www.data.gc.ca redirects to open.canada.ca
+    'gc' => 'canada',
+
+    # donnees.gouv.qc.ca redirects to www.donneesquebec.ca
     'gouv' => 'donneesquebec',
+
+    # www.halifax.ca links to catalogue.hrm.opendata.arcgis.com
     'halifax' => 'hrm',
+
+    # app.kitchener.ca redirects to www.kitchener.ca
+    # www.kitchener.ca links to data.kitchenergis.opendata.arcgis.com
     'kitchener' => 'kitchenergis',
-    'niagaraodi' => 'niagaraopendata',
-    'niagararegion' => 'niagaraopendata',
+
+    # openguelph.wpengine.com links to data.open.guelph.ca
     'openguelph' => 'guelph',
-    'openregina' => 'regina',
-    'princegeorge' => 'cityofpg',
+
+    # maps.qualicumbeach.com links to www.opendatabc.ca
     'qualicumbeach' => 'opendatabc',
-    'regionaldistrict' => 'rdcodatadownload',
+
+    # donnees.ville.sherbrooke.qc.ca redirects to www.donneesquebec.ca
     'sherbrooke' => 'donneesquebec',
+
+    # data.waterloo.ca is a CNAME of opendata.city-of-waterloo.opendata.arcgis.com
+    # opendata.waterloo.ca redirects to www.waterloo.ca
+    # www.waterloo.ca links to opendata.city-of-waterloo.opendata.arcgis.com
     'waterloo' => 'city-of-waterloo',
   }
 
-  bases = Set.new
-  other_bases = Set.new
+  # END SETUP
+
+  master_spreadsheet_bases = Set.new
+  other_source_bases = Set.new
 
   rows.each do |row|
     if row['Catalog URL']
       base = get_base(get_host(row['Catalog URL']))
-      if bases.include?(base) && !allowed_duplicates.include?(base)
+      if master_spreadsheet_bases.include?(base) && !allowed_duplicates.include?(base)
         raise "duplicate base #{base}"
       end
-      bases << base
+      master_spreadsheet_bases << base
     end
   end
 
@@ -513,13 +547,16 @@ task :missing do
 
   # Get others' lists of data catalogs.
   urls = get_source_urls('562d4589dfa2680006000007') - excluded_namara_urls
-  # Local government
+  # Local level
   urls += Nokogiri::XML(open('http://open.canada.ca/sites/default/files/kml_js/open-cities-en.kml').read).remove_namespaces!.xpath('//url').map{|url| Nokogiri::HTML(url.text).xpath('//@href')[0].value}
-  urls += CSV.parse(open('https://docs.google.com/spreadsheets/d/1Qy8LBpm5qd6C7EEMQeNLNDS7ZZAvwqy9LcjjgpOiIFQ/pub?gid=0&single=true&output=csv').read, row_sep: "\r\n").drop(2).map{|row| row[2]}.compact
-  urls += Nokogiri::HTML(open('http://datalibre.ca/links-resources/').read).xpath('//ol[4]//@href').map{|href| href.value}
-  # Regional government
+  urls += CSV.parse(open('https://docs.google.com/spreadsheets/d/1Qy8LBpm5qd6C7EEMQeNLNDS7ZZAvwqy9LcjjgpOiIFQ/pub?gid=0&single=true&output=csv').read, row_sep: "\r\n").drop(2).map{|row| row[2]}.compact # Jury Konga
+  urls += Nokogiri::HTML(open('http://datalibre.ca/links-resources/').read).xpath('//ol[4]//@href').map(&:value)
+  # Regional level
   urls += Nokogiri::XML(open('http://open.canada.ca/sites/default/files/kml_js/open-provinces-en.kml').read).remove_namespaces!.xpath('//url').map{|url| Nokogiri::HTML(url.text).xpath('//@href')[0].value}
-  urls += Nokogiri::HTML(open('http://datalibre.ca/links-resources/').read).xpath('//ol[3]//@href').map{|href| href.value}
+  urls += Nokogiri::HTML(open('http://datalibre.ca/links-resources/').read).xpath('//ol[3]//@href').map(&:value)
+  # Mixed levels
+  urls += CSV.parse(open('https://data.calgary.ca/api/views/grtv-hw7b/rows.csv?accessType=DOWNLOAD').read, headers: true).map{|row| row['Web Site']} - excluded_calgary_urls
+  urls += Nokogiri::HTML(open('http://www2.gov.bc.ca/gov/content/governments/about-the-bc-government/databc/open-data').read).xpath('//div[@id="body"]//ul[1]//@href').map(&:value)
 
   base_to_url_map = {}
 
@@ -527,16 +564,16 @@ task :missing do
     host = get_host(url)
     if host && !excluded_hosts.include?(host)
       base = get_base(host)
-      base_to_url_map[base] ||= []
-      base_to_url_map[base] << host
+      base_to_url_map[base] ||= Set.new
+      base_to_url_map[base] << url
       # Account for different domains for the data catalogs.
-      other_bases << base_corrections.fetch(base, base)
+      other_source_bases << base_corrections.fetch(base, base)
     end
   end
 
-  other_bases.to_a.each do |base|
-    unless bases.include?(base)
-      puts base_to_url_map.fetch(base)
+  other_source_bases.to_a.each do |base|
+    unless master_spreadsheet_bases.include?(base)
+      puts "#{base}\n#{base_to_url_map.fetch(base).to_a.join("\n")}\n\n"
     end
   end
 end
