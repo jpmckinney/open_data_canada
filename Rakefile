@@ -128,10 +128,11 @@ def map(output, input, prefix, size, options = {})
       echo("topojson -o maps/#{output}.topojson #{output_path}")
     end
   else
-    puts "You must have a copy of the shapefile before running this task:"
-    puts "curl -O http://www12.statcan.gc.ca/census-recensement/2011/geo/bound-limit/files-fichiers/#{input}.zip"
-    puts "unzip #{input}.zip"
-    puts "rm -f #{input}.zip"
+    message = "You must have a copy of the shapefile before running this task:\n"
+    message << "curl -O http://www12.statcan.gc.ca/census-recensement/2011/geo/bound-limit/files-fichiers/#{input}.zip\n"
+    message << "unzip #{input}.zip\n"
+    message << "rm -f #{input}.zip\n"
+    raise message
   end
 end
 

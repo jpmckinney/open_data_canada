@@ -10,6 +10,7 @@ Care about open source? Head over to [auditing tools for Canadian governments' o
 
 ## History
 
+* **2017-08-03**: Added Ajax, Quinte West.
 * **2017-01-06**: Added Oshawa.
 * **2016-11-05**: Added Cambridge, Durham, East Hants, Huron, Moncton, North Cowichan, Shawinigan, St. Albert, Yellowknife.
 
