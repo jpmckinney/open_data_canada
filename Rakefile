@@ -67,7 +67,7 @@ def software(url)
     data = open(url, allow_redirections: :safe).read
     if data['https://dobt-opener.s3.amazonaws.com/uploads/']
       'https://www.dobt.co/'
-    elsif data['/esri/css/esri.css']
+    elsif data[%r{/esri/(?:css/)?esri.css}]
       'http://opendata.arcgis.com/'
     elsif data['/Scripts/ogdi/list.js']
       'https://github.com/openlab/OGDI-DataLab'
@@ -89,7 +89,7 @@ def software(url)
     end
   rescue OpenURI::HTTPError => error
     $stderr.puts "#{error.io.status.first} #{url}"
-  rescue Errno::ETIMEDOUT
+  rescue Errno::ETIMEDOUT, Net::ReadTimeout
     $stderr.puts "OUT #{url}"
   end
 end
@@ -406,7 +406,7 @@ task :missing do
 
   # These are multi-tenant.
   allowed_duplicates = Set.new(%w(
-    calgaryregionopendata
+    data-calgaryregion
     donneesquebec
     niagaraopendata
   ))
@@ -421,6 +421,7 @@ task :missing do
     ) +
     # Departmental, in an open data jurisdiction
     %w(
+      data-torontops.opendata.arcgis.com
       geogratis.gc.ca
       gis7.nsgc.gov.ns.ca
       maps.torontopolice.on.ca
@@ -486,38 +487,46 @@ task :missing do
 
   base_corrections = {
     # The following extracted URLs are broken:
+    'burlington' => 'data-burlington', # http://cms.burlington.ca/Page12956.aspx http://cms.burlington.ca/Page7429.aspx http://cob.burlington.opendata.arcgis.com/
     'niagaraodi' => 'niagaraopendata', # http://niagaraodi.cloudapp.net/
     'niagararegion' => 'niagaraopendata', # http://www.niagararegion.ca/government/opendata/default.aspx
     'openregina' => 'regina', # http://openregina.cloudapp.net/
-    'princegeorge' => 'cityofpg', # http://princegeorge.ca/cityservices/online/odc/Pages/default.aspx http://princegeorge.ca/cityservices/online/odc/Pages/Documents.aspx
+    'princegeorge' => 'data-cityofpg', # http://princegeorge.ca/cityservices/online/odc/Pages/default.aspx http://princegeorge.ca/cityservices/online/odc/Pages/Documents.aspx
     'regionaldistrict' => 'rdcodatadownload', # http://www.regionaldistrict.com/services/gis/
 
-    # www.data.gc.ca redirects to open.canada.ca
+    # REDIRECTS
+
+    # www.calgaryregionopendata.ca => data-calgaryregion.opendata.arcgis.com
+    'calgaryregionopendata' => 'data-calgaryregion',
+    # data.countygp.ab.ca => www.countygp.ab.ca links to opendata.countygp.ab.ca => data1-cogp.opendata.arcgis.com
+    'countygp' => 'data1-cogp',
+    # www.data.gc.ca => open.canada.ca
     'gc' => 'canada',
-
-    # donnees.gouv.qc.ca redirects to www.donneesquebec.ca
+    # donnees.gouv.qc.ca => www.donneesquebec.ca
     'gouv' => 'donneesquebec',
-
-    # www.halifax.ca links to catalogue.hrm.opendata.arcgis.com
-    'halifax' => 'hrm',
-
-    # app.kitchener.ca redirects to www.kitchener.ca
-    # www.kitchener.ca links to data.kitchenergis.opendata.arcgis.com
+    # app.kitchener.ca => www.kitchener.ca
     'kitchener' => 'kitchenergis',
+    # donnees.ville.sherbrooke.qc.ca => www.donneesquebec.ca
+    'sherbrooke' => 'donneesquebec',
+    # opendata.waterloo.ca => www.waterloo.ca
+    'waterloo' => 'city-of-waterloo',
 
-    # openguelph.wpengine.com links to data.open.guelph.ca
+    # LINKS
+
+    # www.burlington.ca => data-burlington.opendata.arcgis.com
+    # www.kitchener.ca => data.kitchenergis.opendata.arcgis.com
+    # www.waterloo.ca => opendata.city-of-waterloo.opendata.arcgis.com
+    # www.countygp.ab.ca => opendata.countygp.ab.ca
+    # www.halifax.ca => catalogue.hrm.opendata.arcgis.com
+    'halifax' => 'catalogue-hrm',
+    # openguelph.wpengine.com => data.open.guelph.ca
     'openguelph' => 'guelph',
-
-    # maps.qualicumbeach.com links to www.opendatabc.ca
+    # maps.qualicumbeach.com => www.opendatabc.ca
     'qualicumbeach' => 'opendatabc',
 
-    # donnees.ville.sherbrooke.qc.ca redirects to www.donneesquebec.ca
-    'sherbrooke' => 'donneesquebec',
+    # OTHERS
 
     # data.waterloo.ca is a CNAME of opendata.city-of-waterloo.opendata.arcgis.com
-    # opendata.waterloo.ca redirects to www.waterloo.ca
-    # www.waterloo.ca links to opendata.city-of-waterloo.opendata.arcgis.com
-    'waterloo' => 'city-of-waterloo',
   }
 
   # END SETUP
