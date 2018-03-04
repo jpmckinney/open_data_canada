@@ -6,15 +6,15 @@ GEM
       nokogiri (>= 1.4.1)
       rubyzip (~> 1.0.0)
     htmlentities (4.3.4)
-    mini_portile2 (2.2.0)
-    nokogiri (1.8.0)
-      mini_portile2 (~> 2.2.0)
+    mini_portile2 (2.3.0)
+    nokogiri (1.8.2)
+      mini_portile2 (~> 2.3.0)
     open-uri-cached (0.0.5)
     open_uri_redirections (0.2.1)
-    rake (12.0.0)
+    rake (12.3.0)
     ruby-ole (1.2.12.1)
     rubyzip (1.0.0)
-    spreadsheet (1.1.4)
+    spreadsheet (1.1.5)
       ruby-ole (>= 1.0)
 
 PLATFORMS
@@ -29,4 +29,4 @@ DEPENDENCIES
   spreadsheet
 
 BUNDLED WITH
-   1.15.1
+   1.16.0
