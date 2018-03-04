@@ -89,7 +89,9 @@ def software(url)
     end
   rescue OpenURI::HTTPError => error
     $stderr.puts "#{error.io.status.first} #{url}"
-  rescue Errno::ETIMEDOUT, Net::ReadTimeout
+  rescue OpenSSL::SSL::SSLError => error
+    $stderr.puts "#{error} #{url}"
+  rescue Errno::ETIMEDOUT, Net::ReadTimeout, Errno::ECONNREFUSED
     $stderr.puts "OUT #{url}"
   end
 end
@@ -415,25 +417,29 @@ task :missing do
   excluded_hosts = Set.new(
     # Multi-jurisdictional
     %w(
-      cngo.ca
+      crgis.capitalregionboard.ab.ca
       cto-iov.csa-acvm.ca
       data.wpsgn.opendata.arcgis.com
       maps.grandriver.ca
     ) +
     # Departmental, in an open data jurisdiction
-    %w(
-      data-torontops.opendata.arcgis.com
-      geogratis.gc.ca
-      gis7.nsgc.gov.ns.ca
-      maps.torontopolice.on.ca
-      opendata.tplcs.ca
-      sis.agr.gc.ca
-      www.aer.ca
-      www.empr.gov.bc.ca
-      www.javacoeapp.lrc.gov.on.ca
-      www.octranspo1.com
-      www.osc.gov.on.ca
-    ) +
+    [
+      # Canada
+      'geogratis.gc.ca',
+      'sis.agr.gc.ca',
+      'www.elections.ca',
+      # Alberta
+      'www.aer.ca',
+      # Nova Scotia
+      'gis7.nsgc.gov.ns.ca',
+      # Ontario
+      'www.javacoeapp.lrc.gov.on.ca',
+      'www.osc.gov.on.ca',
+      'www.sdc.gov.on.ca',
+      # Toronto
+      'data.torontopolice.on.ca',
+      'opendata.tplcs.ca',
+    ] +
     # Civil society
     %w(
       capitaleouverte.org
@@ -446,13 +452,14 @@ task :missing do
       www.datato.org
       www.opendatalondon.ca
       www.opendataottawa.ca
+      www.opendatask.ca
       www.opendatawr.ca
+      www.opennwt.ca
       www.quebecouvert.org
     ) +
     # Non-governmental
     %w(
       databasin.org
-      www.gtfs-data-exchange.com
     ) +
     # Non-Canadian
     %w(
@@ -471,12 +478,8 @@ task :missing do
   # These are not open data (2017-01-24).
   # https://namara.io/#/search/open?order=relevance&states=imported&source=5600339c5d95cd0001000039&source=56003416375733000100002e&source=5600348bfe5b0c0001000039&source=54d3a92170726f18024a0100&source=560ad6e3801c03000100070a&source=54da910470726f62ea1e0100&page=1
   excluded_namara_urls = Set.new(%w(
-    http://maps.morinville.ca/morinville/view.aspx
     http://mapservices.gov.yk.ca/arcgis
-    http://www.colwood.ca/city-hall/maps
     http://www.gov.nu.ca/
-    http://www.sprucegrove.org/services/online_services/gis.htm
-    http://www.sturgeoncounty.ca/Services/AssessmentServices/tabid/180/Default.aspx
     https://www.mern.gouv.qc.ca/english/mines/publications/publications-maps.jsp
   ))
 
@@ -488,10 +491,11 @@ task :missing do
 
   base_corrections = {
     # The following extracted URLs are broken:
+    'brantford' => 'data-brantford', # http://data.brantford.opendata.arcgis.com/
     'burlington' => 'data-burlington', # http://cms.burlington.ca/Page12956.aspx http://cms.burlington.ca/Page7429.aspx http://cob.burlington.opendata.arcgis.com/
+    'kamloops' => 'mydata-kamloops', # http://www.kamloops.ca/downloads/maps/launch.htm
     'niagaraodi' => 'niagaraopendata', # http://niagaraodi.cloudapp.net/
     'niagararegion' => 'niagaraopendata', # http://www.niagararegion.ca/government/opendata/default.aspx
-    'openregina' => 'regina', # http://openregina.cloudapp.net/
     'princegeorge' => 'data-cityofpg', # http://princegeorge.ca/cityservices/online/odc/Pages/default.aspx http://princegeorge.ca/cityservices/online/odc/Pages/Documents.aspx
     'regionaldistrict' => 'rdcodatadownload', # http://www.regionaldistrict.com/services/gis/
 
@@ -532,14 +536,22 @@ task :missing do
 
   # END SETUP
 
+  extra_allowed_duplicates = allowed_duplicates.dup
+  extra_excluded_hosts = excluded_hosts.dup
+  extra_base_corrections = base_corrections.dup
+
   master_spreadsheet_bases = Set.new
   other_source_bases = Set.new
 
   rows.each do |row|
     if row['Catalog URL']
       base = get_base(get_host(row['Catalog URL']))
-      if master_spreadsheet_bases.include?(base) && !allowed_duplicates.include?(base)
-        raise "duplicate base #{base}"
+      if master_spreadsheet_bases.include?(base)
+        if allowed_duplicates.include?(base)
+          extra_allowed_duplicates.delete(base)
+        else
+          raise "duplicate base #{base}"
+        end
       end
       master_spreadsheet_bases << base
     end
@@ -549,36 +561,61 @@ task :missing do
     urls = Set.new
     JSON.load(open("https://api.namara.io/v0/source_nestings?parent_id=#{id}").read).each do |source|
       id = source.fetch('id')
-      urls += JSON.load(open("https://api.namara.io/v0/sources?source_nesting_id=#{id}").read).map{|source| source['url']}
+      urls += JSON.load(open("https://api.namara.io/v0/sources?source_nesting_id=#{id}&api_key=#{ENV.fetch('API_KEY')}").read).map{|source| source['url']}
       urls += get_source_urls(id)
     end
     urls
   end
 
   # Get others' lists of data catalogs.
-  urls = get_source_urls('562d4589dfa2680006000007') - excluded_namara_urls
+  namara_urls = get_source_urls('562d4589dfa2680006000007')
+  urls = namara_urls - excluded_namara_urls
   # Local level
-  urls += Nokogiri::XML(open('http://open.canada.ca/sites/default/files/kml_js/open-cities-en.kml').read).remove_namespaces!.xpath('//url').map{|url| Nokogiri::HTML(url.text).xpath('//@href')[0].value}
+  urls += Nokogiri::XML(open('https://open.canada.ca/sites/default/files/kml/open-cities-en.kml').read).remove_namespaces!.xpath('//url').map{|url| Nokogiri::HTML(url.text).xpath('//@href')[0].value}
   urls += CSV.parse(open('https://docs.google.com/spreadsheets/d/1Qy8LBpm5qd6C7EEMQeNLNDS7ZZAvwqy9LcjjgpOiIFQ/pub?gid=0&single=true&output=csv').read, row_sep: "\r\n").drop(2).map{|row| row[2]}.compact # Jury Konga
   urls += Nokogiri::HTML(open('http://datalibre.ca/links-resources/').read).xpath('//ol[4]//@href').map(&:value)
   # Regional level
-  urls += Nokogiri::XML(open('http://open.canada.ca/sites/default/files/kml_js/open-provinces-en.kml').read).remove_namespaces!.xpath('//url').map{|url| Nokogiri::HTML(url.text).xpath('//@href')[0].value}
+  urls += Nokogiri::XML(open('https://open.canada.ca/sites/default/files/kml/open-provinces-en.kml').read).remove_namespaces!.xpath('//url').map{|url| Nokogiri::HTML(url.text).xpath('//@href')[0].value}
   urls += Nokogiri::HTML(open('http://datalibre.ca/links-resources/').read).xpath('//ol[3]//@href').map(&:value)
   # Mixed levels
-  urls += CSV.parse(open('https://data.calgary.ca/api/views/grtv-hw7b/rows.csv?accessType=DOWNLOAD').read, headers: true).map{|row| row['Web Site']} - excluded_calgary_urls
-  urls += Nokogiri::HTML(open('http://www2.gov.bc.ca/gov/content/governments/about-the-bc-government/databc/open-data').read).xpath('//div[@id="body"]//ul[1]//@href').map(&:value)
+  calgary_urls = CSV.parse(open('https://data.calgary.ca/api/views/grtv-hw7b/rows.csv?accessType=DOWNLOAD').read, headers: true).map{|row| row['Web Site']}
+  urls += calgary_urls - excluded_calgary_urls
 
   base_to_url_map = {}
 
   urls.each do |url|
     host = get_host(url)
-    if host && !excluded_hosts.include?(host)
-      base = get_base(host)
-      base_to_url_map[base] ||= Set.new
-      base_to_url_map[base] << url
-      # Account for different domains for the data catalogs.
-      other_source_bases << base_corrections.fetch(base, base)
+    if host
+      if excluded_hosts.include?(host)
+        extra_excluded_hosts.delete(host)
+      else
+        base = get_base(host)
+        base_to_url_map[base] ||= Set.new
+        base_to_url_map[base] << url
+        # Account for different domains for the data catalogs.
+        other_source_bases << base_corrections.fetch(base, base)
+        extra_base_corrections.delete(base)
+      end
     end
+  end
+
+  def report_extra_items(name, items)
+    if items.any?
+      puts "Remove #{name}:"
+      items.sort.each do |item|
+        puts item
+      end
+      puts
+    end
+  end
+
+  { 'allowed_duplicates' => extra_allowed_duplicates,
+    'excluded_hosts' => extra_excluded_hosts,
+    'base_corrections' => extra_base_corrections.keys,
+    'excluded_namara_urls' => excluded_namara_urls - namara_urls,
+    'excluded_calgary_urls' => excluded_calgary_urls - calgary_urls,
+  }.each do |name, items|
+    report_extra_items(name, items)
   end
 
   other_source_bases.to_a.each do |base|
