@@ -1,6 +1,6 @@
 # Database of Canadian open government data catalogs
 
-The purpose of this project is to compile the most complete list of Canadian open government data catalogs. It aggregates all known but incomplete lists, including those of [Namara](https://namara.io/), [Canada](http://open.canada.ca/en/maps/open-data-canada), [British Columbia](http://www2.gov.bc.ca/gov/content/governments/about-the-bc-government/databc/open-data), [Calgary](https://data.calgary.ca/Government/Alberta-Open-Data-Portals-Map-View/grtv-hw7b), Jury Konga and Tracey Lauriault.
+The purpose of this project is to compile the most complete list of Canadian open government data catalogs. It aggregates all known but incomplete lists, including those of [Namara](https://namara.io/), [Canada](http://open.canada.ca/en/maps/open-data-canada), [Calgary](https://data.calgary.ca/Government/Alberta-Open-Data-Portals-Map-View/grtv-hw7b), Jury Konga and Tracey Lauriault.
 
 This project also collects the open data licenses, open data policies, contact information and catalog software of the more than 100 open data catalogs that it tracks.
 
@@ -10,6 +10,7 @@ Care about open source? Head over to [auditing tools for Canadian governments' o
 
 ## History
 
+* **2018-03-04**: Added Cowichan Valley, Dufferin, Hastings. British Columbia no longer [maintains its own list](https://www2.gov.bc.ca/gov/content/data/open-data/open-data-nationally-globally).
 * **2017-08-03**: Added Ajax, Quinte West.
 * **2017-01-06**: Added Oshawa.
 * **2016-11-05**: Added Cambridge, Durham, East Hants, Huron, Moncton, North Cowichan, Shawinigan, St. Albert, Yellowknife.
@@ -35,15 +36,14 @@ View the maps of:
     bundle
     bundle exec rake --tasks
 
+Get a [Namara](https://namara.io) API key.
+
 The typical sequence is:
 
-    bundle exec rake missing
+    bundle exec rake missing API_KEY=…
     bundle exec rake spreadsheet
     bundle exec rake markdown
-    bundle exec rake map_provinces_and_territories
-    bundle exec rake map_census_divisions
-    bundle exec rake map_census_subdivisions
-    bundle exec rake map
+    bundle exec rake map_provinces_and_territories map_census_divisions map_census_subdivisions map
 
 ## Why?
 
