@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'axlsx'
+gem 'axlsx', '~>3.0.0-pre'
 gem 'nokogiri'
 gem 'rake'
 gem 'open-uri-cached'
