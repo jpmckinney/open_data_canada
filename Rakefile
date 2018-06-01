@@ -89,10 +89,10 @@ def software(url)
     end
   rescue OpenURI::HTTPError => error
     $stderr.puts "#{error.io.status.first} #{url}"
+  rescue Errno::ETIMEDOUT, Net::ReadTimeout, Errno::ECONNREFUSED, SocketError
+    $stderr.puts "OUT #{url}"
   rescue OpenSSL::SSL::SSLError => error
     $stderr.puts "#{error} #{url}"
-  rescue Errno::ETIMEDOUT, Net::ReadTimeout, Errno::ECONNREFUSED
-    $stderr.puts "OUT #{url}"
   end
 end
 
@@ -421,6 +421,11 @@ task :missing do
       cto-iov.csa-acvm.ca
       data.wpsgn.opendata.arcgis.com
       maps.grandriver.ca
+      www.sedar.com
+    ) +
+    # Legislative
+    %w(
+      www.ourcommons.ca
     ) +
     # Departmental, in an open data jurisdiction
     [
@@ -460,6 +465,7 @@ task :missing do
     # Non-governmental
     %w(
       databasin.org
+      open-data.cloca.com
     ) +
     # Non-Canadian
     %w(
@@ -479,7 +485,7 @@ task :missing do
   # https://namara.io/#/search/open?order=relevance&states=imported&source=5600339c5d95cd0001000039&source=56003416375733000100002e&source=5600348bfe5b0c0001000039&source=54d3a92170726f18024a0100&source=560ad6e3801c03000100070a&source=54da910470726f62ea1e0100&page=1
   excluded_namara_urls = Set.new(%w(
     http://mapservices.gov.yk.ca/arcgis
-    http://www.gov.nu.ca/
+    https://www.gov.nu.ca/
     https://www.mern.gouv.qc.ca/english/mines/publications/publications-maps.jsp
   ))
 
