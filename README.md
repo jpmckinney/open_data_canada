@@ -10,6 +10,7 @@ Care about open source? Head over to [auditing tools for Canadian governments' o
 
 ## History
 
+* **2019-01-25**: Added Add Markham, Norfolk County, Fort Erie, Scugog, Uxbridge, Niagara-on-the-Lake, Brock.
 * **2018-03-04**: Added Cowichan Valley, Dufferin, Hastings. British Columbia no longer [maintains its own list](https://www2.gov.bc.ca/gov/content/data/open-data/open-data-nationally-globally).
 * **2017-08-03**: Added Ajax, Quinte West.
 * **2017-01-06**: Added Oshawa.
